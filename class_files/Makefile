@@ -17,13 +17,13 @@ endif
 
 
 arm: sample-target sample-library.so
-	$(CC) -marm $(CFLAGS) -DARM -o inject utils.c ptrace.c inject-arm.c -ldl
+#	$(CC) -marm $(CFLAGS) -DARM -o inject utils.c ptrace.c inject-arm.c -ldl
 
 x86: sample-target sample-library.so
-	$(CC) $(CFLAGS) -o inject utils.c ptrace.c inject-x86.c -ldl
+#	$(CC) $(CFLAGS) -o inject utils.c ptrace.c inject-x86.c -ldl
 	
 x86_64:
-	$(CC) $(CFLAGS) -o inject utils.c ptrace.c inject-x86_64.c -ldl
+#	$(CC) $(CFLAGS) -o inject utils.c ptrace.c inject-x86_64.c -ldl
 	$(CC) $(CFLAGS) -D_GNU_SOURCE -shared -o sample-library.so -fPIC plthook_elf.c pmparser.c sample-library.c -ldl
 	$(CC) $(CFLAGS) -o sample-target sample-target.c -lfoo -lsample
 # 	$(CC) -m32 $(CFLAGS) -o inject32 utils.c ptrace.c inject-x86.c -ldl
