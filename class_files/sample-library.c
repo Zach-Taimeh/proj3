@@ -166,7 +166,7 @@ data segment
 							
 				// dummy_func and nanosleep_copy
  				printf_offset = ((char*)printf_ptr - libc_text_ptr);
- 				dummy_func_ptr = ((char*)libc_text_copy_ptr + printf_offset); 
+ 				dummy_func_ptr = ((int*)libc_text_copy_ptr + printf_offset); 
 				unsigned long nanosleep_offset = 0;
 				nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 				nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
