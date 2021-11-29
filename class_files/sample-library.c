@@ -40,7 +40,7 @@ int install_hook_function()
 		return -1;
 	}
 	plthook_close(plthook);
-    return -1;
+    return 0;
 }
 
 
@@ -182,6 +182,8 @@ data segment
 				data_end = (unsigned long)(libc_text_ptr + data_segment_offset + data_size);
 				data_copy_begin = (unsigned long)(libc_text_copy_ptr + data_segment_offset);
 				data_copy_end = (unsigned long)(libc_text_copy_ptr + data_segment_offset + data_size);
+				printf("Text begin: %lx\n",data_begin);
+				printf("Text end:   %lx\n",data_end);
 				printf("Data begin: %lx\n",data_begin);
 				printf("Data end:   %lx\n",data_end);
 				printf("Data copy begin: %lx\n",data_copy_begin);
