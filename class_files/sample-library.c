@@ -8,8 +8,8 @@
 #include "pmparser.h"
 //#include "foo.h"
 
-void (*dummy_func_ptr)(char*);
-void (*printf_ptr)(char*);
+int (*dummy_func_ptr)(char*);
+int (*printf_ptr)(char*);
 //void (*dummy_func_ptr);
 //void (*printf_ptr)(char*);
 void (*nanosleep_ptr);
@@ -166,7 +166,7 @@ data segment
 							
 				// dummy_func and nanosleep_copy
  				printf_offset = ((char*)printf_ptr - libc_text_ptr);
- 				dummy_func_ptr = libc_text_copy_ptr + printf_offset; 
+ 				dummy_func_ptr = ((char*)libc_text_copy_ptr + printf_offset); 
 				unsigned long nanosleep_offset = 0;
 				nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 				nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
