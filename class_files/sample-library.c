@@ -182,8 +182,8 @@ data segment
 				data_end = (unsigned long)(libc_text_ptr + data_segment_offset + data_size);
 				data_copy_begin = (unsigned long)(libc_text_copy_ptr + data_segment_offset);
 				data_copy_end = (unsigned long)(libc_text_copy_ptr + data_segment_offset + data_size);
-				printf("Text begin: %lx\n",data_begin);
-				printf("Text end:   %lx\n",data_end);
+				printf("Text begin: %lx\n",text_begin);
+				printf("Text end:   %lx\n",text_end);
 				printf("Data begin: %lx\n",data_begin);
 				printf("Data end:   %lx\n",data_end);
 				printf("Data copy begin: %lx\n",data_copy_begin);
@@ -195,11 +195,11 @@ data segment
 					if (test_data_pointer > data_begin && test_data_pointer < data_end) {
 						*(test_data_address) = test_data_pointer - translation;
 						test_data_pointer = *(test_data_address);
-						//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
+						printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
 					} else if (test_data_pointer > text_begin && test_data_pointer < text_end) {
 						*(test_data_address) = test_data_pointer - translation;
 						test_data_pointer = *(test_data_address);
-						//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
+						printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
 					}
 					
 				}
@@ -256,19 +256,19 @@ int printProcessMemory()
 __attribute__((constructor))
 void loadMsg()
 {
-    //printProcessMemory();
+    printProcessMemory();
 	print_plt_entries("");
-	//printf("____________________");
-	//print_plt_entries("name=/lib/x86_64-linux-gnu/libc.so.6");
+	printf("____________________");
+	print_plt_entries("name=/lib/x86_64-linux-gnu/libc.so.6");
 	dl_iterate_phdr(callback, NULL);
-	//printf("Address of printf is :%p\n", printf);
-	//printf("Address of dummy ptr is :%p\n",dummy_func_ptr);
-	//printf("Address of my_foo is :%p\n",my_foo);
-	//printf("Starting plt part\n");
-	//printf("Address of function foo is :%p\n", foo);
-	//print_plt_entries("");
+	printf("Address of printf is :%p\n", printf);
+	printf("Address of dummy ptr is :%p\n",dummy_func_ptr);
+	printf("Address of my_foo is :%p\n",my_foo);
+	printf("Starting plt part\n");
+	printf("Address of function foo is :%p\n", foo);
+	print_plt_entries("");
 	install_hook_function();
-	//print_plt_entries("");
+	print_plt_entries("");
 	hello();
 }
 __attribute__((destructor))
