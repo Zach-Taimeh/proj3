@@ -52,13 +52,13 @@ int print_plt_entries(const char *filename)
     void **addr;
 
     if (plthook_open(&plthook, filename) != 0) {
-        //printf("plthook_open error: %s\n", plthook_error());
+        printf("plthook_open error: %s\n", plthook_error());
         return -1;
     }
     while (plthook_enum(plthook, &pos, &name, &addr) == 0) {
         printf("%p(%p) %s\n", addr, *addr, name);
 	if (strncmp(name,"printf",6) == 0){
-		//printf("hello\n");
+		printf("hello\n");
 		printf_ptr = *addr;
 	} else if(strncmp(name,"nanosleep",9) == 0){
 		nanosleep_ptr = *addr;
@@ -164,7 +164,7 @@ data segment
 							
 				// dummy_func and nanosleep_copy
  				printf_offset = ((char*)printf_ptr - libc_text_ptr);
- 				//dummy_func_ptr = libc_text_copy_ptr + printf_offset; 
+ 				dummy_func_ptr = libc_text_copy_ptr + printf_offset; 
 				unsigned long nanosleep_offset = 0;
 				nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 				nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
