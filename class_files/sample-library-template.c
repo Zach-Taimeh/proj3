@@ -26,7 +26,7 @@ int install_hook_function()
 {
  //... install hook function
  //... update printf and nanosleep addresses
-	printf("inst_hook_func")
+	printf("inst_hook_func ")
 	plthook_t *plthook;
 	if (plthook_open(&plthook, "") != 0){
 		return -1;
@@ -216,7 +216,7 @@ data segment
 
 void hello()
 {
-	printf("I just got loaded\n");
+	printf("Hello! I just got loaded\n");
 }
 
 int printProcessMemory()
