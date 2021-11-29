@@ -20,7 +20,7 @@ unsigned long translation;
 static int my_foo(int var)
 {
   puts("puts called");
-  (*dummy_func_ptr)("hello\n");
+  (*printf_ptr)("hello\n");
   return 10;
 }
     
