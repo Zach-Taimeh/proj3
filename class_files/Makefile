@@ -21,7 +21,7 @@ arm: sample-target sample-library.so
 
 x86: sample-target sample-library.so
 #	$(CC) $(CFLAGS) -o inject utils.c ptrace.c inject-x86.c -ldl
-	
+
 x86_64:
 #	$(CC) $(CFLAGS) -o inject utils.c ptrace.c inject-x86_64.c -ldl
 	$(CC) $(CFLAGS) -D_GNU_SOURCE -shared -o sample-library.so -fPIC plthook_elf.c pmparser.c sample-library.c -ldl
