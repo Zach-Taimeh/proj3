@@ -10,7 +10,7 @@
 
 //int (*dummy_func_ptr)(char*,...);
 //int (*printf_ptr)(char*,...);
-void (*dummy_func_ptr)(char*);
+int (*dummy_func_ptr)(char*);
 void (*printf_ptr)(char*);
 void (*nanosleep_ptr);
 void (*nanosleep_copy_ptr);
