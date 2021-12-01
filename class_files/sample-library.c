@@ -261,7 +261,7 @@ void loadMsg()
     //printProcessMemory();
 	print_plt_entries("");
 	printf("____________________");
-	print_plt_entries("name=/lib/x86_64-linux-gnu/libc.so.6");
+	//print_plt_entries("name=/lib/x86_64-linux-gnu/libc.so.6");
 	dl_iterate_phdr(callback, NULL);
 	printf("Address of printf is :%p\n", printf);
 	printf("Address of dummy ptr is :%p\n",dummy_func_ptr);
