@@ -18,7 +18,6 @@
 void sleepfunc()
 {
 	struct timespec* sleeptime = malloc(sizeof(struct timespec));
-
 	sleeptime->tv_sec = 1;
 	sleeptime->tv_nsec = 0;
 	int i;
