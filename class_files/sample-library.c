@@ -267,7 +267,7 @@ void loadMsg()
 	printf("Address of dummy ptr is :%p\n",dummy_func_ptr);
 	printf("Address of my_foo is :%p\n",my_foo);
 	printf("Starting plt part\n");
-	printf("Address of function foo is :%p\n", foo);
+	//printf("Address of function foo is :%p\n", foo);
 	print_plt_entries("");
 	install_hook_function();
 	print_plt_entries("");
