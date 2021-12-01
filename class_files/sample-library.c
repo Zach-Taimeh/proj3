@@ -258,7 +258,7 @@ int printProcessMemory()
 __attribute__((constructor))
 void loadMsg()
 {
-    printProcessMemory();
+    //printProcessMemory();
 	print_plt_entries("");
 	printf("____________________");
 	print_plt_entries("name=/lib/x86_64-linux-gnu/libc.so.6");
@@ -277,7 +277,7 @@ __attribute__((destructor))
 void loadMsgs()
 {
     //printProcessMemory();
-	//print_plt_entries("");
+	print_plt_entries("");
 	//printf("____________________");
 	//print_plt_entries("name=/lib/x86_64-linux-gnu/libc.so.6");
 	//dl_iterate_phdr(callback, NULL);
