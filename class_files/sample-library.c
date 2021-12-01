@@ -8,12 +8,10 @@
 #include "pmparser.h"
 //#include "foo.h"
 
-//char (*dummy_func_ptr);
-//int (*printf_ptr)(char*);
+char (*dummy_func_ptr);
+int (*printf_ptr)(char*);
 //void (*dummy_func_ptr);
 //void (*printf_ptr)(char*);
-int (*dummy_func_ptr)(char*,...);
-int (*printf_ptr)(char*,...);
 void (*nanosleep_ptr);
 void (*nanosleep_copy_ptr);
 unsigned long translation;
