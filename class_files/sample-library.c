@@ -42,7 +42,7 @@ int install_hook_function()
 		return -1;
 	}
 	plthook_close(plthook);
-    return 0;
+    return -1;
 }
 
 
