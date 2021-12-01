@@ -42,7 +42,7 @@ void sleepfunc()
 int main()
 {
 	int a=foo(0);
-    //printf("Main function foo: %d\n",a);
+    printf("Main function foo: %d\n",a);
 	sleepfunc();
 	//puts("breakpoint here");
 	printf("Main function foo: \n");
