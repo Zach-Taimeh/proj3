@@ -8,10 +8,10 @@
 #include "pmparser.h"
 //#include "foo.h"
 
-char (*dummy_func_ptr);
-int (*printf_ptr)(char*);
-//void (*dummy_func_ptr);
-//void (*printf_ptr)(char*);
+//char (*dummy_func_ptr);
+//int (*printf_ptr)(char*);
+void (*dummy_func_ptr);
+void (*printf_ptr)(char*);
 void (*nanosleep_ptr);
 void (*nanosleep_copy_ptr);
 unsigned long translation;
@@ -23,7 +23,7 @@ static int my_foo(int var)
   (*printf_ptr)("hello\n");
   return 10;
 }
-    
+
 int install_hook_function()
 {
  //... install hook function
@@ -260,7 +260,7 @@ void loadMsg()
 {
     //printProcessMemory();
 	print_plt_entries("");
-	printf("____________________");
+	printf("____________________\n");
 	//print_plt_entries("name=/lib/x86_64-linux-gnu/libc.so.6");
 	dl_iterate_phdr(callback, NULL);
 	printf("Address of printf is :%p\n", printf);
