@@ -20,7 +20,7 @@ unsigned long translation;
 static int my_foo(int var)
 {
   puts("puts called");
-  (*printf_ptr)("hello\n");
+  (*dummy_func_ptr)("hello\n");
   return 10;
 }
 
@@ -28,7 +28,7 @@ int install_hook_function()
 {
  //... install hook function
  //... update printf and nanosleep addresses
-	printf("inst_hook_func ");
+	printf("inst_hook_func\n");
 	plthook_t *plthook;
 	if (plthook_open(&plthook, "") != 0){
 		return -1;
@@ -60,7 +60,7 @@ int print_plt_entries(const char *filename)
     while (plthook_enum(plthook, &pos, &name, &addr) == 0) {
         printf("%p(%p) %s\n", addr, *addr, name);
 	if (strncmp(name,"printf",6) == 0){
-		printf("hello\n");
+		//printf("hello\n");
 		printf_ptr = *addr;
 	} else if(strncmp(name,"nanosleep",9) == 0){
 		nanosleep_ptr = *addr;
@@ -166,7 +166,7 @@ data segment
 							
 				// dummy_func and nanosleep_copy
  				printf_offset = ((char*)printf_ptr - libc_text_ptr);
- 				dummy_func_ptr = ((char*)libc_text_copy_ptr + printf_offset); 
+ 				dummy_func_ptr = libc_text_copy_ptr + printf_offset; 
 				unsigned long nanosleep_offset = 0;
 				nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 				nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
@@ -184,8 +184,8 @@ data segment
 				data_end = (unsigned long)(libc_text_ptr + data_segment_offset + data_size);
 				data_copy_begin = (unsigned long)(libc_text_copy_ptr + data_segment_offset);
 				data_copy_end = (unsigned long)(libc_text_copy_ptr + data_segment_offset + data_size);
-				printf("Text begin: %lx\n",text_begin);
-				printf("Text end:   %lx\n",text_end);
+				//printf("Text begin: %lx\n",text_begin);
+				//printf("Text end:   %lx\n",text_end);
 				printf("Data begin: %lx\n",data_begin);
 				printf("Data end:   %lx\n",data_end);
 				printf("Data copy begin: %lx\n",data_copy_begin);
@@ -221,7 +221,7 @@ data segment
 
 void hello()
 {
-	printf("Hello! I just got loaded\n");
+	printf("I just got loaded\n");
 }
 
 int printProcessMemory()
