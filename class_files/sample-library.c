@@ -8,7 +8,7 @@
 #include "pmparser.h"
 //#include "foo.h"
 
-char* (*dummy_func_ptr)(char* c);
+char (*dummy_func_ptr)(char* c);
 int (*printf_ptr)(char* c);
 //void (*dummy_func_ptr);
 //void (*printf_ptr);
