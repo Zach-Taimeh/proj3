@@ -20,7 +20,7 @@ unsigned long translation;
 static int my_foo(int var)
 {
   puts("puts called");
-  (*printf_ptr)("hello\n");
+  (*dummy_func_ptr)("hello\n");
   return 10;
 }
 
@@ -33,7 +33,7 @@ int install_hook_function()
 	if (plthook_open(&plthook, "") != 0){
 		return -1;
 	}
-	if (plthook_replace(plthook, "printf", (void*)dummy_func_ptr, NULL) !=0){
+	if (plthook_replace(plthook, "printf", (int*)dummy_func_ptr, NULL) !=0){
 		plthook_close(plthook);
 		return -1;
 	}
