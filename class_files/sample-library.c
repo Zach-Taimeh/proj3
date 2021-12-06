@@ -8,8 +8,8 @@
 #include "pmparser.h"
 //#include "foo.h"
 
-char (*dummy_func_ptr)(char* c);
-int (*printf_ptr)(char* c);
+int (*dummy_func_ptr)(char*,...);
+int (*printf_ptr)(char*,...);
 //void (*dummy_func_ptr);
 //void (*printf_ptr);
 void (*nanosleep_ptr);
