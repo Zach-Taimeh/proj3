@@ -129,8 +129,7 @@ data segment
     libc_text_copy_ptr = (char *)0;
     libc_text_ptr = (char *)0;
     libc_data_ptr = (char *)0;
-    unsigned long printf_offset;
-    printf_offset = 0;
+
 
     // looping through segments within shared libraries and categorizing them
     // as text/code segments or data segments
@@ -163,7 +162,7 @@ data segment
 				memcpy((libc_text_copy_ptr+data_segment_offset),libc_data_ptr,data_size);
 
 				translation = libc_text_ptr-libc_text_copy_ptr;
-							
+				unsigned long printf_offset = 0;
 				// dummy_func and nanosleep_copy
  				printf_offset = ((char*)printf_ptr - libc_text_ptr);
  				dummy_func_ptr = libc_text_copy_ptr + printf_offset; 
