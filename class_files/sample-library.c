@@ -8,7 +8,7 @@
 #include "pmparser.h"
 //#include "foo.h"
 
-int (*dummy_func_ptr)(char*);
+void (*dummy_func_ptr)(char*);
 int (*printf_ptr)(char*);
 //void (*dummy_func_ptr);
 //void (*printf_ptr);
@@ -20,7 +20,7 @@ unsigned long translation;
 static int my_foo(int var)
 {
   puts("puts called");
-  (*dummy_func_ptr)("hello\n");
+  (*printf_ptr)("hello\n");
   return 10;
 }
 
