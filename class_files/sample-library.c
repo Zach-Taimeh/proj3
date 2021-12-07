@@ -152,7 +152,7 @@ data segment
 		                                   
  		if (strncmp(info->dlpi_name,"/lib/x86_64-linux-gnu/libc.so.6",31) == 0){
  			if (segment_type == 1){
-				 printf("inside callback");
+				 printf("inside callback"\n);
  				text_size = info->dlpi_phdr[j].p_memsz;
  				libc_text_ptr = (char *)info->dlpi_addr + info->dlpi_phdr[j].p_vaddr;
 
@@ -250,7 +250,7 @@ int printProcessMemory()
 
 void *randomize()
 {
-	dl_iterate_phdr(callback, NULL);
+	//dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	print_plt_entries("");
 	sleep(10);
