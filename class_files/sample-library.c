@@ -252,7 +252,7 @@ void *randomize()
 {
 
 	sleep(10);
-	printf("*****************\nRANDOMIZING AGAIN\n *****************\n");
+	printf("*****************\nRANDOMIZING AGAIN\n\\*****************\n");
 	//dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	//dl_iterate_phdr(callback, NULL);
