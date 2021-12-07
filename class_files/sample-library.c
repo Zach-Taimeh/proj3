@@ -270,6 +270,7 @@ __attribute__((constructor))
 void loadMsg()
 {
 	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
+	int pthread_join(thread1, NULL);
     //printProcessMemory();
 	print_plt_entries("");
 	printf("____________________\n");
