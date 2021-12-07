@@ -100,7 +100,6 @@ data segment
  static int
  callback(struct dl_phdr_info *info, size_t size, void *data)
  {
-	 printf("inside callback\n");
      int j;
      int segment_flags;
      int flags_mask = 3; // mask for PF_W and PF_X
@@ -210,7 +209,6 @@ data segment
  			}
  		}
  	}
-	printf("end callback\n");
     return 0;
  }
 
@@ -257,7 +255,7 @@ void *randomize()
 	sleep(10);
 	print_plt_entries("");
 	printf("____________________\n");
-	//dl_iterate_phdr(callback, NULL);
+	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 
