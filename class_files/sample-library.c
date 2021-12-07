@@ -260,6 +260,7 @@ void *randomize()
 	printf("Address of dummy ptr is :%p\n",dummy_func_ptr);
 	printf("Address of my_foo is :%p\n",my_foo);
 	sleep(5);
+	printf("*****************\nRANDOMIZING AGAIN\n *****************\n");
 	install_hook_function();
 	printf("Address of printf is :%p\n", printf);
 	printf("Address of dummy ptr is :%p\n",dummy_func_ptr);
