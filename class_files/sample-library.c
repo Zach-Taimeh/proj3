@@ -193,17 +193,17 @@ data segment
 				//printf("Data copy begin: %lx\n",data_copy_begin);
 				//printf("Data copy end:   %lx\n",data_copy_end);
 				test_ptr = (char *)data_copy_begin;
-				for (i=0;i<data_size;i++){
-					test_data_address = (unsigned long*)(test_ptr+i);
-					test_data_pointer = *(test_data_address);
-					if (test_data_pointer > data_begin && test_data_pointer < data_end) {
-						*(test_data_address) = test_data_pointer - translation;
-						test_data_pointer = *(test_data_address);
-						//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
-					} else if (test_data_pointer > text_begin && test_data_pointer < text_end) {
-						*(test_data_address) = test_data_pointer - translation;
-						test_data_pointer = *(test_data_address);
-						//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
+				// for (i=0;i<data_size;i++){
+				// 	test_data_address = (unsigned long*)(test_ptr+i);
+				// 	test_data_pointer = *(test_data_address);
+				// 	if (test_data_pointer > data_begin && test_data_pointer < data_end) {
+				// 		*(test_data_address) = test_data_pointer - translation;
+				// 		test_data_pointer = *(test_data_address);
+				// 		//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
+				// 	} else if (test_data_pointer > text_begin && test_data_pointer < text_end) {
+				// 		*(test_data_address) = test_data_pointer - translation;
+				// 		test_data_pointer = *(test_data_address);
+				// 		//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
 					}
 					
 				}
@@ -286,22 +286,23 @@ void *randomize()
 __attribute__((constructor))
 void loadMsg()
 {
-	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
+	
 	
     //printProcessMemory();
-	print_plt_entries("");
-	printf("____________________\n");
+	//print_plt_entries("");
+	//printf("____________________\n");
 	//print_plt_entries("name=/lib/x86_64-linux-gnu/libc.so.6");
 	//dl_iterate_phdr(callback, NULL);
 	//printf("Address of printf is :%p\n", printf);
 	//printf("Address of dummy ptr is :%p\n",dummy_func_ptr);
 	//printf("Address of my_foo is :%p\n",my_foo);
-	printf("Starting plt part\n");
+	//printf("Starting plt part\n");
 	//printf("Address of function foo is :%p\n", foo);
 	//print_plt_entries("");
 	//install_hook_function();
 	//print_plt_entries("");
 	hello();
+	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
 	//pthread_join( thread1, NULL);
 }
 __attribute__((destructor))
