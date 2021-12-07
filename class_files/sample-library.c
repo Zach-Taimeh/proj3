@@ -289,8 +289,8 @@ void loadMsg()
 	
 	
     //printProcessMemory();
-	//print_plt_entries("");
-	//printf("____________________\n");
+	print_plt_entries("");
+	printf("____________________\n");
 	//print_plt_entries("name=/lib/x86_64-linux-gnu/libc.so.6");
 	dl_iterate_phdr(callback, NULL);
 	//printf("Address of printf is :%p\n", printf);
