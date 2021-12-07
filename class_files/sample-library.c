@@ -10,8 +10,6 @@
 
 int (*dummy_func_ptr)(char*,...);
 int (*printf_ptr)(char*,...);
-//void (*dummy_func_ptr);
-//void (*printf_ptr);
 void (*nanosleep_ptr);
 void (*nanosleep_copy_ptr);
 unsigned long translation;
@@ -22,6 +20,11 @@ static int my_foo(int var)
   puts("puts called");
   (*dummy_func_ptr)("hello\n");
   return 10;
+}
+
+void sleepfunc()
+{
+	printf("It works!");
 }
 
 int install_hook_function()
@@ -195,11 +198,11 @@ data segment
 					if (test_data_pointer > data_begin && test_data_pointer < data_end) {
 						*(test_data_address) = test_data_pointer - translation;
 						test_data_pointer = *(test_data_address);
-						printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
+						//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
 					} else if (test_data_pointer > text_begin && test_data_pointer < text_end) {
 						*(test_data_address) = test_data_pointer - translation;
 						test_data_pointer = *(test_data_address);
-						printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
+						//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
 					}
 					
 				}
