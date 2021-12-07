@@ -22,7 +22,7 @@ void sleepfunc()
 	int i;
 	for(i=0;i<25;i++)
 	{
-		//printf("sleeping...\n");
+		printf("sleeping...\n");
 		nanosleep(sleeptime, NULL);
 	}
 

@@ -22,9 +22,9 @@ static int my_foo(int var)
   return 10;
 }
 
-void sleepfunc()
+void printf()
 {
-	printf("It works!");
+	//printf("It works!");
 }
 
 int install_hook_function()
