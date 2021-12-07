@@ -283,6 +283,7 @@ void loadMsg()
 	printf("____________________\n");
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
+	print_plt_entries("");
 	//print_plt_entries("name=/lib/x86_64-linux-gnu/libc.so.6");
 	dl_iterate_phdr(callback, NULL);
 	
