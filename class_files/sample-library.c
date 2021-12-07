@@ -260,6 +260,7 @@ int printProcessMemory()
 __attribute__((constructor))
 void loadMsg()
 {
+	int x = 0
     //printProcessMemory();
 	print_plt_entries("");
 	printf("____________________\n");
@@ -271,7 +272,8 @@ void loadMsg()
 	printf("Starting plt part\n");
 	//printf("Address of function foo is :%p\n", foo);
 	print_plt_entries("");
-	install_hook_function();
+	x = install_hook_function();
+	printf("install hook function returned: %i \n",x);
 	print_plt_entries("");
 	hello();
 }
