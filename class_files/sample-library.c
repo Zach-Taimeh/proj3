@@ -32,7 +32,7 @@ void *randomize()
 	{
 		sleep(10);
 		printf("*****************\nRANDOMIZING AGAIN\n *****************\n");
-		print_plt_entries();
+		print_plt_entries("");
 		install_hook_function();
 	}
 }
