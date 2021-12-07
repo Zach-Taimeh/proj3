@@ -260,7 +260,7 @@ int printProcessMemory()
 __attribute__((constructor))
 void loadMsg()
 {
-	int x = 0
+	int x = 0;
     //printProcessMemory();
 	print_plt_entries("");
 	printf("____________________\n");
