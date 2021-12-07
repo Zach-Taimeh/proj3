@@ -22,9 +22,9 @@ static int my_foo(int var)
   return 10;
 }
 
-extern int printf (const char *__restrict __format, ...)
+int nanosleep(const struct timespec *req, struct timespec *rem)
 {
-	//printf("It works!");
+	
 	return 0;
 }
 
