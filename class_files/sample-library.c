@@ -141,13 +141,13 @@ data segment
  		segment_flags = info->dlpi_phdr[j].p_flags;
  		segment_type = segment_flags & flags_mask;
 		
- 		// if (segment_type == 1){
-        //  printf("\t\t header %2d: address=%10p: memsize=%lu: type=text segment\n", j,
-        //       (void *) (info->dlpi_addr + info->dlpi_phdr[j].p_vaddr),info->dlpi_phdr[j].p_memsz);
- 		// } else if (segment_type == 2){
- 		//  printf("\t\t header %2d: address=%10p: memsize=%1lu: type=data segment\n", j,
-        //       (void *) (info->dlpi_addr + info->dlpi_phdr[j].p_vaddr),info->dlpi_phdr[j].p_memsz);
- 		// }
+ 		if (segment_type == 1){
+         printf("\t\t header %2d: address=%10p: memsize=%lu: type=text segment\n", j,
+              (void *) (info->dlpi_addr + info->dlpi_phdr[j].p_vaddr),info->dlpi_phdr[j].p_memsz);
+ 		} else if (segment_type == 2){
+ 		 printf("\t\t header %2d: address=%10p: memsize=%1lu: type=data segment\n", j,
+              (void *) (info->dlpi_addr + info->dlpi_phdr[j].p_vaddr),info->dlpi_phdr[j].p_memsz);
+ 		}
 
 		                                   
  		if (strncmp(info->dlpi_name,"/lib/x86_64-linux-gnu/libc.so.6",31) == 0){
@@ -251,8 +251,8 @@ int printProcessMemory()
 void *randomize()
 {
 	//dl_iterate_phdr(callback, NULL);
-	install_hook_function();
-	print_plt_entries("");
+	//install_hook_function();
+	//print_plt_entries("");
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	dl_iterate_phdr(callback, NULL);
