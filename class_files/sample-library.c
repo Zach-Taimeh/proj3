@@ -22,11 +22,11 @@ static int my_foo(int var)
   return 10;
 }
 
-//int nanosleep(const struct timespec *req, struct timespec *rem)
-//{
-//	
-//	return 0;
-//}
+int nanosleep(const struct timespec *req, struct timespec *rem)
+{
+	printf("inside nanosleep\n\n");
+	return 0;
+}
 
 int install_hook_function()
 {
@@ -278,7 +278,6 @@ void loadMsg()
 __attribute__((destructor))
 void loadMsgs()
 {
-	printf("Goodbye\n");
     //printProcessMemory();
 	print_plt_entries("");
 	//printf("____________________");
