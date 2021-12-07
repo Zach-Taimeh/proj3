@@ -204,9 +204,9 @@ data segment
 				// 		*(test_data_address) = test_data_pointer - translation;
 				// 		test_data_pointer = *(test_data_address);
 				// 		//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
-					}
+				//	}
 					
-				}
+				//}
 				
  			}
  		}
