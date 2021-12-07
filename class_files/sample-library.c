@@ -32,8 +32,8 @@ void *randomize()
 	{
 		sleep(10);
 		printf("*****************\nRANDOMIZING AGAIN\n *****************\n");
+		dl_iterate_phdr(callback, NULL);
 		print_plt_entries("");
-		install_hook_function();
 	}
 }
 
@@ -270,7 +270,7 @@ __attribute__((constructor))
 void loadMsg()
 {
 	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
-	pthread_join(thread1, NULL);
+	
     //printProcessMemory();
 	print_plt_entries("");
 	printf("____________________\n");
@@ -289,6 +289,7 @@ void loadMsg()
 __attribute__((destructor))
 void loadMsgs()
 {
+	
     //printProcessMemory();
 	print_plt_entries("");
 	//printf("____________________");
