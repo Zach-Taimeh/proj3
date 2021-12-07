@@ -26,16 +26,7 @@ static int my_foo(int var)
   return 10;
 }
 
-void *randomize()
-{
-	while(1)
-	{
-		sleep(10);
-		printf("*****************\nRANDOMIZING AGAIN\n *****************\n");
-		dl_iterate_phdr(callback, NULL);
-		print_plt_entries("");
-	}
-}
+
 
 int install_hook_function()
 {
@@ -255,6 +246,17 @@ int printProcessMemory()
     //mandatory: should free the list
     pmparser_free(maps);
     return 0;
+}
+
+void *randomize()
+{
+	while(1)
+	{
+		sleep(10);
+		printf("*****************\nRANDOMIZING AGAIN\n *****************\n");
+		dl_iterate_phdr(callback, NULL);
+		print_plt_entries("");
+	}
 }
 
 /*
