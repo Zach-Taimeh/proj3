@@ -22,6 +22,7 @@ void sleepfunc()
 	int i;
 	for(i=0;i<25;i++)
 	{
+		printf("address of nanosleep is: %p", &nanosleep);
 		printf("sleeping...\n");
 		nanosleep(sleeptime, NULL);
 	}
