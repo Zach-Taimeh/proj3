@@ -257,7 +257,7 @@ void *randomize()
 	sleep(10);
 	print_plt_entries("");
 	printf("____________________\n");
-	dl_iterate_phdr(callback, NULL);
+	//dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 
@@ -291,7 +291,7 @@ void loadMsg()
 	//print_plt_entries("");
 	//install_hook_function();
 	//print_plt_entries("");
-	rt1 = pthread_create(thread1, NULL, randomize, NULL);
+	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
 	hello();
 	//pthread_join( thread1, NULL);
 }
