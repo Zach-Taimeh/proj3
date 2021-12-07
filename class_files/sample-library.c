@@ -6,6 +6,7 @@
 #include <sys/mman.h>
 #include "plthook.h"
 #include "pmparser.h"
+#include <pthread.h>
 //#include "foo.h"
 
 int (*dummy_func_ptr)(char*,...);
@@ -13,6 +14,9 @@ int (*printf_ptr)(char*,...);
 void (*nanosleep_ptr);
 void (*nanosleep_copy_ptr);
 unsigned long translation;
+pthread_t thread1;
+int rt1;
+
 
 /* This function is called instead of recv() called by libfoo.so.1  */
 static int my_foo(int var)
@@ -22,10 +26,13 @@ static int my_foo(int var)
   return 10;
 }
 
-int nanosleep(const struct timespec *req, struct timespec *rem)
+void *randomize()
 {
-	printf("inside nanosleep\n\n");
-	return 0;
+	while(1)
+	{
+		sleep(10);
+		install_hook_function();
+	}
 }
 
 int install_hook_function()
@@ -260,7 +267,7 @@ int printProcessMemory()
 __attribute__((constructor))
 void loadMsg()
 {
-	int x = 0;
+	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
     //printProcessMemory();
 	print_plt_entries("");
 	printf("____________________\n");
@@ -272,8 +279,7 @@ void loadMsg()
 	printf("Starting plt part\n");
 	//printf("Address of function foo is :%p\n", foo);
 	print_plt_entries("");
-	x = install_hook_function();
-	printf("install hook function returned: %i \n",x);
+	install_hook_function();
 	print_plt_entries("");
 	hello();
 }
