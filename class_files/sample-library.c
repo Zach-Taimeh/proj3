@@ -292,14 +292,14 @@ void loadMsg()
 	//print_plt_entries("");
 	//printf("____________________\n");
 	//print_plt_entries("name=/lib/x86_64-linux-gnu/libc.so.6");
-	//dl_iterate_phdr(callback, NULL);
+	dl_iterate_phdr(callback, NULL);
 	//printf("Address of printf is :%p\n", printf);
 	//printf("Address of dummy ptr is :%p\n",dummy_func_ptr);
 	//printf("Address of my_foo is :%p\n",my_foo);
 	//printf("Starting plt part\n");
 	//printf("Address of function foo is :%p\n", foo);
 	//print_plt_entries("");
-	//install_hook_function();
+	install_hook_function();
 	//print_plt_entries("");
 	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
 	hello();
