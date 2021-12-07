@@ -105,9 +105,9 @@ data segment
      int flags_mask = 3; // mask for PF_W and PF_X
      int segment_type;
 
-    printf("name=%s (%d segments)\n", info->dlpi_name,
-         info->dlpi_phnum);
-    printf("address=%10p\n",(void *)(info->dlpi_addr));
+    // printf("name=%s (%d segments)\n", info->dlpi_name,
+    //      info->dlpi_phnum);
+    // printf("address=%10p\n",(void *)(info->dlpi_addr));
 
     // Declare variables
     char *libc_text_copy_ptr;
