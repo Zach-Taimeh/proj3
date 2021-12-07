@@ -31,7 +31,7 @@ void *randomize()
 	while(1)
 	{
 		sleep(10);
-		printf("*****************\nRANDOMIZING AGAIN\n*****************")
+		printf("*****************\nRANDOMIZING AGAIN\n*****************");
 		install_hook_function();
 	}
 }
