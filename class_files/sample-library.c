@@ -49,10 +49,10 @@ int install_hook_function()
 		plthook_close(plthook);
 		return -1;
 	}
-	//if(plthook_replace(plthook,"nanosleep", (void*)nanosleep_copy_ptr, NULL) !=0){
-	//	plthook_close(plthook);
-	//	return -1;
-	//}
+	if(plthook_replace(plthook,"nanosleep", (void*)nanosleep_copy_ptr, NULL) !=0){
+		plthook_close(plthook);
+		return -1;
+	}
 	plthook_close(plthook);
     return 0;
 }
