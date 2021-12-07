@@ -152,6 +152,7 @@ data segment
 		                                   
  		if (strncmp(info->dlpi_name,"/lib/x86_64-linux-gnu/libc.so.6",31) == 0){
  			if (segment_type == 1){
+				 printf("inside callback")
  				text_size = info->dlpi_phdr[j].p_memsz;
  				libc_text_ptr = (char *)info->dlpi_addr + info->dlpi_phdr[j].p_vaddr;
 
@@ -193,21 +194,20 @@ data segment
 				//printf("Data copy begin: %lx\n",data_copy_begin);
 				//printf("Data copy end:   %lx\n",data_copy_end);
 				test_ptr = (char *)data_copy_begin;
-				// for (i=0;i<data_size;i++){
-				// 	test_data_address = (unsigned long*)(test_ptr+i);
-				// 	test_data_pointer = *(test_data_address);
-				// 	if (test_data_pointer > data_begin && test_data_pointer < data_end) {
-				// 		*(test_data_address) = test_data_pointer - translation;
-				// 		test_data_pointer = *(test_data_address);
-				// 		//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
-				// 	} else if (test_data_pointer > text_begin && test_data_pointer < text_end) {
-				// 		*(test_data_address) = test_data_pointer - translation;
-				// 		test_data_pointer = *(test_data_address);
-				// 		//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
-				//	}
+				for (i=0;i<data_size;i++){
+					test_data_address = (unsigned long*)(test_ptr+i);
+					test_data_pointer = *(test_data_address);
+					if (test_data_pointer > data_begin && test_data_pointer < data_end) {
+						*(test_data_address) = test_data_pointer - translation;
+						test_data_pointer = *(test_data_address);
+						//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
+					} else if (test_data_pointer > text_begin && test_data_pointer < text_end) {
+						*(test_data_address) = test_data_pointer - translation;
+						test_data_pointer = *(test_data_address);
+						//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
+					}
 					
-				//}
-				
+				}
  			}
  		}
  	}
