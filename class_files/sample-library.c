@@ -250,96 +250,12 @@ int printProcessMemory()
 
 void *randomize()
 {
-	    // Declare variables
-    char *libc_text_copy_ptr;
-    char *libc_text_ptr;
-    char *libc_data_ptr;
-    unsigned long toAdd = 0;
-    unsigned long libc_total_copy_size = 0;
-    unsigned long text_size = 0;
-    unsigned long data_size = 0;
-    unsigned long data_segment_offset = 0;
-    unsigned long lea_opcode;
-    unsigned long *lea_opcode_ptr;
-    unsigned long data_copy_begin = 0;
-    unsigned long data_copy_end = 0;
-
-    char *test_ptr;
-    unsigned long *test_data_address;
-    unsigned long test_data_pointer;
-    unsigned long mask;
-
-    // Initialize variables
-    libc_text_copy_ptr = (char *)0;
-    libc_text_ptr = (char *)0;
-    libc_data_ptr = (char *)0;
-	text_size = info->dlpi_phdr[j].p_memsz;
-	libc_text_ptr = (char *)info->dlpi_addr + info->dlpi_phdr[j].p_vaddr;
-
-	data_size = info->dlpi_phdr[j+1].p_memsz;
-	libc_data_ptr = (char *)info->dlpi_addr + info->dlpi_phdr[j+1].p_vaddr;
-	data_segment_offset = libc_data_ptr - libc_text_ptr;
-	libc_total_copy_size = data_size + (unsigned long)data_segment_offset;	
-	
-	libc_text_copy_ptr = (char *) alloc_executable_memory(0,libc_total_copy_size);
-	memcpy(libc_text_copy_ptr,libc_text_ptr,text_size);
-	memcpy((libc_text_copy_ptr+data_segment_offset),libc_data_ptr,data_size);
-
-	translation = libc_text_ptr-libc_text_copy_ptr;
-	unsigned long printf_offset = 0;
-	// dummy_func and nanosleep_copy
-	printf_offset = ((char*)printf_ptr - libc_text_ptr);
-	dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
-	unsigned long nanosleep_offset = 0;
-	nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
-	nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
+	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	print_plt_entries("");
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
-		    // Declare variables
-    char *libc_text_copy_ptr;
-    char *libc_text_ptr;
-    char *libc_data_ptr;
-    unsigned long toAdd = 0;
-    unsigned long libc_total_copy_size = 0;
-    unsigned long text_size = 0;
-    unsigned long data_size = 0;
-    unsigned long data_segment_offset = 0;
-    unsigned long lea_opcode;
-    unsigned long *lea_opcode_ptr;
-    unsigned long data_copy_begin = 0;
-    unsigned long data_copy_end = 0;
-
-    char *test_ptr;
-    unsigned long *test_data_address;
-    unsigned long test_data_pointer;
-    unsigned long mask;
-
-    // Initialize variables
-    libc_text_copy_ptr = (char *)0;
-    libc_text_ptr = (char *)0;
-    libc_data_ptr = (char *)0;
-	text_size = info->dlpi_phdr[j].p_memsz;
-	libc_text_ptr = (char *)info->dlpi_addr + info->dlpi_phdr[j].p_vaddr;
-
-	data_size = info->dlpi_phdr[j+1].p_memsz;
-	libc_data_ptr = (char *)info->dlpi_addr + info->dlpi_phdr[j+1].p_vaddr;
-	data_segment_offset = libc_data_ptr - libc_text_ptr;
-	libc_total_copy_size = data_size + (unsigned long)data_segment_offset;	
-	
-	libc_text_copy_ptr = (char *) alloc_executable_memory(0,libc_total_copy_size);
-	memcpy(libc_text_copy_ptr,libc_text_ptr,text_size);
-	memcpy((libc_text_copy_ptr+data_segment_offset),libc_data_ptr,data_size);
-
-	translation = libc_text_ptr-libc_text_copy_ptr;
-	unsigned long printf_offset = 0;
-	// dummy_func and nanosleep_copy
-	printf_offset = ((char*)printf_ptr - libc_text_ptr);
-	dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
-	unsigned long nanosleep_offset = 0;
-	nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
-	nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
+	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	print_plt_entries("");
 	//dl_iterate_phdr(callback, NULL);
