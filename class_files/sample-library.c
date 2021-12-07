@@ -22,7 +22,7 @@ static int my_foo(int var)
   return 10;
 }
 
-int printf()
+extern int printf (const char *__restrict __format, ...)
 {
 	//printf("It works!");
 	return 0;
