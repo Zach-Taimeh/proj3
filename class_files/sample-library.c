@@ -142,10 +142,10 @@ data segment
  		segment_type = segment_flags & flags_mask;
 		
  		if (segment_type == 1){
-         		printf("\t\t header %2d: address=%10p: memsize=%lu: type=text segment\n", j,
+         		//printf("\t\t header %2d: address=%10p: memsize=%lu: type=text segment\n", j,
               (void *) (info->dlpi_addr + info->dlpi_phdr[j].p_vaddr),info->dlpi_phdr[j].p_memsz);
  		} else if (segment_type == 2){
- 			printf("\t\t header %2d: address=%10p: memsize=%1lu: type=data segment\n", j,
+ 			  //printf("\t\t header %2d: address=%10p: memsize=%1lu: type=data segment\n", j,
               (void *) (info->dlpi_addr + info->dlpi_phdr[j].p_vaddr),info->dlpi_phdr[j].p_memsz);
  		}
 
@@ -286,9 +286,9 @@ void loadMsg()
 	printf("____________________\n");
 	//print_plt_entries("name=/lib/x86_64-linux-gnu/libc.so.6");
 	dl_iterate_phdr(callback, NULL);
-	printf("Address of printf is :%p\n", printf);
-	printf("Address of dummy ptr is :%p\n",dummy_func_ptr);
-	printf("Address of my_foo is :%p\n",my_foo);
+	//printf("Address of printf is :%p\n", printf);
+	//printf("Address of dummy ptr is :%p\n",dummy_func_ptr);
+	//printf("Address of my_foo is :%p\n",my_foo);
 	printf("Starting plt part\n");
 	//printf("Address of function foo is :%p\n", foo);
 	print_plt_entries("");
