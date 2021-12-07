@@ -100,6 +100,7 @@ data segment
  static int
  callback(struct dl_phdr_info *info, size_t size, void *data)
  {
+	 printf("inside callback\n");
      int j;
      int segment_flags;
      int flags_mask = 3; // mask for PF_W and PF_X
@@ -142,17 +143,16 @@ data segment
  		segment_type = segment_flags & flags_mask;
 		
  		if (segment_type == 1){
-         printf("\t\t header %2d: address=%10p: memsize=%lu: type=text segment\n", j,
-              (void *) (info->dlpi_addr + info->dlpi_phdr[j].p_vaddr),info->dlpi_phdr[j].p_memsz);
+         //printf("\t\t header %2d: address=%10p: memsize=%lu: type=text segment\n", j,
+              //(void *) (info->dlpi_addr + info->dlpi_phdr[j].p_vaddr),info->dlpi_phdr[j].p_memsz);
  		} else if (segment_type == 2){
- 		 printf("\t\t header %2d: address=%10p: memsize=%1lu: type=data segment\n", j,
-              (void *) (info->dlpi_addr + info->dlpi_phdr[j].p_vaddr),info->dlpi_phdr[j].p_memsz);
+ 		 //printf("\t\t header %2d: address=%10p: memsize=%1lu: type=data segment\n", j,
+              //(void *) (info->dlpi_addr + info->dlpi_phdr[j].p_vaddr),info->dlpi_phdr[j].p_memsz);
  		}
 
 		                                   
  		if (strncmp(info->dlpi_name,"/lib/x86_64-linux-gnu/libc.so.6",31) == 0){
  			if (segment_type == 1){
-				 printf("inside callback\n");
  				text_size = info->dlpi_phdr[j].p_memsz;
  				libc_text_ptr = (char *)info->dlpi_addr + info->dlpi_phdr[j].p_vaddr;
 
@@ -206,11 +206,11 @@ data segment
 						test_data_pointer = *(test_data_address);
 						//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
 					}
-					
 				}
  			}
  		}
  	}
+	printf("end callback\n")
     return 0;
  }
 
