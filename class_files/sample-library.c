@@ -250,23 +250,24 @@ int printProcessMemory()
 
 void *randomize()
 {
-
+	dl_iterate_phdr(callback, NULL);
+	install_hook_function();
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n\\*****************\n");
 	//dl_iterate_phdr(callback, NULL);
-	dl_iterate_phdr(callback, NULL);
-	install_hook_function();
+	//dl_iterate_phdr(callback, NULL);
+	//install_hook_function();
 	printf("Address of printf is :%p\n", printf);
 	printf("Address of dummy ptr is :%p\n",dummy_func_ptr);
 	printf("Address of my_foo is :%p\n",my_foo);
 	sleep(5);
 	printf("*****************\nRANDOMIZING AGAIN\n\\*****************\n");
 	
-	install_hook_function();
+	//install_hook_function();
 	printf("Address of printf is :%p\n", printf);
 	printf("Address of dummy ptr is :%p\n",dummy_func_ptr);
 	printf("Address of my_foo is :%p\n",my_foo);
-
+	return 0;
 }
 
 /*
@@ -287,14 +288,14 @@ void loadMsg()
 	print_plt_entries("");
 	printf("____________________\n");
 	//print_plt_entries("name=/lib/x86_64-linux-gnu/libc.so.6");
-	dl_iterate_phdr(callback, NULL);
+	//dl_iterate_phdr(callback, NULL);
 	//printf("Address of printf is :%p\n", printf);
 	//printf("Address of dummy ptr is :%p\n",dummy_func_ptr);
 	//printf("Address of my_foo is :%p\n",my_foo);
 	printf("Starting plt part\n");
 	//printf("Address of function foo is :%p\n", foo);
 	print_plt_entries("");
-	install_hook_function();
+	//install_hook_function();
 	print_plt_entries("");
 	hello();
 	//pthread_join( thread1, NULL);
