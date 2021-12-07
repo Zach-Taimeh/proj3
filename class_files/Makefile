@@ -24,7 +24,7 @@ x86: sample-target sample-library.so
 	
 x86_64:
 #	$(CC) $(CFLAGS) -o inject utils.c ptrace.c inject-x86_64.c -ldl
-	$(CC) $(CFLAGS) -D_GNU_SOURCE -shared -o sample-library.so -fPIC plthook_elf.c pmparser.c sample-library.c -ldl
+	$(CC) $(CFLAGS) -D_GNU_SOURCE -shared -o sample-library.so -fPIC plthook_elf.c pmparser.c sample-library.c -ldl -pthread
 	$(CC) $(CFLAGS) -o sample-target sample-target.c -lfoo -lsample
 # 	$(CC) -m32 $(CFLAGS) -o inject32 utils.c ptrace.c inject-x86.c -ldl
 # 	$(CC) -m32 $(CFLAGS) -D_GNU_SOURCE -shared -o sample-library32.so -fPIC sample-library.c
