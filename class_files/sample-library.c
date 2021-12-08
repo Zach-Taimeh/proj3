@@ -187,12 +187,12 @@ data segment
 				data_end = (unsigned long)(libc_text_ptr + data_segment_offset + data_size);
 				data_copy_begin = (unsigned long)(libc_text_copy_ptr + data_segment_offset);
 				data_copy_end = (unsigned long)(libc_text_copy_ptr + data_segment_offset + data_size);
-				printf("Text begin: %lx\n",text_begin);
-				printf("Text end:   %lx\n",text_end);
-				printf("Data begin: %lx\n",data_begin);
-				printf("Data end:   %lx\n",data_end);
-				printf("Data copy begin: %lx\n",data_copy_begin);
-				printf("Data copy end:   %lx\n",data_copy_end);
+				// printf("Text begin: %lx\n",text_begin);
+				// printf("Text end:   %lx\n",text_end);
+				// printf("Data begin: %lx\n",data_begin);
+				// printf("Data end:   %lx\n",data_end);
+				// printf("Data copy begin: %lx\n",data_copy_begin);
+				// printf("Data copy end:   %lx\n",data_copy_end);
 				test_ptr = (char *)data_copy_begin;
 				for (i=0;i<data_size;i++){
 					test_data_address = (unsigned long*)(test_ptr+i);
