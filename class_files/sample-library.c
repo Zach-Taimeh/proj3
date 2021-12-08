@@ -255,11 +255,11 @@ void *randomize()
 	install_hook_function();
 	print_plt_entries("");
 	sleep(10);
-	printf("____________________\n");
+	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
-	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	sleep(10);
+	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 
