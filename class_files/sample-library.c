@@ -255,7 +255,6 @@ void *randomize()
 	install_hook_function();
 	print_plt_entries("");
 	sleep(10);
-	print_plt_entries("");
 	printf("____________________\n");
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
