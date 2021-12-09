@@ -321,6 +321,7 @@ void *randomize()
 	print_plt_entries("");
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
+	dl_iterate_phdr(callback, NULL);
 	install_hook_functions();
 	print_plt_entriess("");
 	sleep(10);
