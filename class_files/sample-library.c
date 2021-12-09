@@ -495,7 +495,7 @@ void loadMsg()
 	//print_plt_entries("");
 	//install_hook_function();
 	print_plt_entries("");
-	print_plt_entriess("");
+	//print_plt_entriess("");
 	//print_plt_entries("");
 	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
 	hello();
