@@ -83,7 +83,7 @@ int print_plt_entries(const char *filename)
     unsigned int pos = 0; /* This must be initialized with zero. */
     const char *name;
     void **addr;
-
+	
     if (plthook_open(&plthook, filename) != 0) {
         printf("plthook_open error: %s\n", plthook_error());
         return -1;
@@ -226,8 +226,8 @@ data segment
 
  				printf_offset = ((char*)printf_ptr - libc_text_ptr);
 				prints_offset = ((char*)prints_ptr - libc_text_ptr);
- 				dummy_func_ptr = (libc_text_copy_ptr + printf_offset + printf_offset); 
-				dummy_funcs_ptr = (libc_text_copy_ptr + prints_offset + prints_offset); 
+ 				dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
+				dummy_funcs_ptr = (*dummy_func_ptr); 
 				printf("dummy func addr: %p\n",dummy_func_ptr);
 				printf("dummy funcs addr: %p\n",dummy_funcs_ptr);
 				printf("printf_ptr: %p\n",(char*)printf_ptr);
