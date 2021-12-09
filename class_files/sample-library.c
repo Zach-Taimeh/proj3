@@ -99,6 +99,29 @@ int print_plt_entries(const char *filename)
     plthook_close(plthook);
     return 0;
 }
+int print_plt_entriess(const char *filename)
+{
+    plthook_t *plthook;
+    unsigned int pos = 0; /* This must be initialized with zero. */
+    const char *name;
+    void **addr;
+
+    if (plthook_open(&plthook, filename) != 0) {
+        printf("plthook_open error: %s\n", plthook_error());
+        return -1;
+    }
+    while (plthook_enum(plthook, &pos, &name, &addr) == 0) {
+        printf("%p(%p) %s\n", addr, *addr, name);
+	if (strncmp(name,"printf",6) == 0){
+		//printf("hello\n");
+		prints_ptr = *addr;
+	} else if(strncmp(name,"nanosleep",9) == 0){
+		nanosleeps_ptr = *addr;
+	}
+    }
+    plthook_close(plthook);
+    return 0;
+}
 
 // Allocates RWX memory of given size and returns a pointer to it. On failure,
 // prints out the error and returns NULL.
@@ -288,7 +311,7 @@ void *randomize()
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	install_hook_functions();
-	print_plt_entries("");
+	print_plt_entriess("");
 	sleep(10);
 	//printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	//dl_iterate_phdr(callback, NULL);
