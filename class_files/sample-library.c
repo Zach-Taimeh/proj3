@@ -228,8 +228,8 @@ data segment
 				prints_offset = ((char*)prints_ptr - libc_text_ptr);
  				dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
 				dummy_funcs_ptr = (*dummy_func_ptr); 
-				printf("dummy func addr: %p\n",dummy_func_ptr);
-				printf("dummy funcs addr: %p\n",dummy_funcs_ptr);
+				printf("dummy func addr: %p\n",*dummy_func_ptr);
+				printf("dummy funcs addr: %p\n",*dummy_funcs_ptr);
 				printf("printf_ptr: %p\n",(char*)printf_ptr);
 				printf("printf_offset: %i\n",printf_offset);
 				printf("prints_ptr: %p\n",(char*)prints_ptr);
