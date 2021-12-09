@@ -57,6 +57,7 @@ int install_hook_functions()
 {
  //... install hook function
  //... update printf and nanosleep addresses
+	printf("Second run: \n");
 	plthook_t *plthook;
 	if (plthook_open(&plthook, "") != 0){
 		return -1;
@@ -225,8 +226,8 @@ data segment
 
  				printf_offset = ((char*)printf_ptr - libc_text_ptr);
 				prints_offset = ((char*)prints_ptr - libc_text_ptr);
- 				dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
-				dummy_funcs_ptr = (libc_text_copy_ptr + prints_offset); 
+ 				dummy_func_ptr = (libc_text_copy_ptr + printf_offset + printf_offset); 
+				dummy_funcs_ptr = (libc_text_copy_ptr + prints_offset + prints_offset); 
 				printf("dummy func addr: %p\n",dummy_func_ptr);
 				printf("dummy funcs addr: %p\n",dummy_funcs_ptr);
 				printf("printf_ptr: %p\n",(char*)printf_ptr);
