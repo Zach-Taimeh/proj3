@@ -10,9 +10,13 @@
 //#include "foo.h"
 
 int (*dummy_func_ptr)(char*,...);
+int (*dummy_funcs_ptr)(char*,...);
 int (*printf_ptr)(char*,...);
+int (*prints_ptr)(char*,...);
 void (*nanosleep_ptr);
+void (*nanosleeps_ptr);
 void (*nanosleep_copy_ptr);
+void (*nanosleeps_copy_ptr);
 unsigned long translation;
 pthread_t thread1;
 int rt1;
@@ -42,6 +46,27 @@ int install_hook_function()
 		return -1;
 	}
 	if(plthook_replace(plthook,"nanosleep", (void*)nanosleep_copy_ptr, NULL) !=0){
+		plthook_close(plthook);
+		printf("nanosleep replace fail\n");
+		return -1;
+	}
+	plthook_close(plthook);
+    return 0;
+}
+int install_hook_functions()
+{
+ //... install hook function
+ //... update printf and nanosleep addresses
+	plthook_t *plthook;
+	if (plthook_open(&plthook, "") != 0){
+		return -1;
+	}
+	if (plthook_replace(plthook, "printf", (int*)dummy_funcs_ptr, NULL) !=0){
+		plthook_close(plthook);
+		printf("printf replace fail\n");
+		return -1;
+	}
+	if(plthook_replace(plthook,"nanosleep", (void*)nanosleeps_copy_ptr, NULL) !=0){
 		plthook_close(plthook);
 		printf("nanosleep replace fail\n");
 		return -1;
@@ -167,12 +192,18 @@ data segment
 
 				translation = libc_text_ptr-libc_text_copy_ptr;
 				unsigned long printf_offset = 0;
+				unsigned long prints_offset = 0;
 				// dummy_func and nanosleep_copy
  				printf_offset = ((char*)printf_ptr - libc_text_ptr);
+				prints_offset = ((char*)prints_ptr - libc_text_ptr);
  				dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
+				dummy_funcs_ptr = (libc_text_copy_ptr + prints_offset); 
 				unsigned long nanosleep_offset = 0;
+				unsigned long nanosleeps_offset = 0;
 				nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
+				nanosleeps_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
 				nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
+				nanosleeps_copy_ptr = libc_text_copy_ptr + nanosleeps_offset;
 
 				test_ptr = (char*)(libc_data_ptr);;
 				unsigned long i = 0;
@@ -256,12 +287,12 @@ void *randomize()
 	print_plt_entries("");
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
-	dl_iterate_phdr(callback, NULL);
-	install_hook_function();
+	install_hook_functions();
+	print_plt_entries("");
 	sleep(10);
-	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
-	dl_iterate_phdr(callback, NULL);
-	install_hook_function();
+	//printf("*****************\nRANDOMIZING AGAIN\n****************\n");
+	//dl_iterate_phdr(callback, NULL);
+	//install_hook_function();
 
 	return 0;
 }
