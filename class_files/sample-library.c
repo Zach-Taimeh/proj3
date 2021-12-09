@@ -53,28 +53,28 @@ int install_hook_function()
 	plthook_close(plthook);
     return 0;
 }
-// int install_hook_functions()
-// {
-//  //... install hook function
-//  //... update printf and nanosleep addresses
-// 	printf("Second run: \n");
-// 	plthook_t *plthook;
-// 	if (plthook_open(&plthook, "") != 0){
-// 		return -1;
-// 	}
-// 	if (plthook_replace(plthook, "printf", (int*)dummy_funcs_ptr, NULL) !=0){
-// 		plthook_close(plthook);
-// 		printf("printf replace fail\n");
-// 		return -1;
-// 	}
-// 	if(plthook_replace(plthook,"nanosleep", (void*)nanosleeps_copy_ptr, NULL) !=0){
-// 		plthook_close(plthook);
-// 		printf("nanosleep replace fail\n");
-// 		return -1;
-// 	}
-// 	plthook_close(plthook);
-//     return 0;
-// }
+int install_hook_functions()
+{
+ //... install hook function
+ //... update printf and nanosleep addresses
+	printf("Second run: \n");
+	plthook_t *plthook;
+	if (plthook_open(&plthook, "") != 0){
+		return -1;
+	}
+	if (plthook_replace(plthook, "printf", (int*)dummy_funcs_ptr, NULL) !=0){
+		plthook_close(plthook);
+		printf("printf replace fail\n");
+		return -1;
+	}
+	if(plthook_replace(plthook,"nanosleep", (void*)nanosleeps_copy_ptr, NULL) !=0){
+		plthook_close(plthook);
+		printf("nanosleep replace fail\n");
+		return -1;
+	}
+	plthook_close(plthook);
+    return 0;
+}
 
 
 int print_plt_entries(const char *filename)
@@ -93,8 +93,10 @@ int print_plt_entries(const char *filename)
 	if (strncmp(name,"printf",6) == 0){
 		//printf("hello\n");
 		printf_ptr = *addr;
+		prints_ptr = *addr;
 	} else if(strncmp(name,"nanosleep",9) == 0){
 		nanosleep_ptr = *addr;
+		nanosleeps_ptr = *addr;
 	}
     }
     plthook_close(plthook);
@@ -493,7 +495,7 @@ void loadMsg()
 	//print_plt_entries("");
 	//install_hook_function();
 	print_plt_entries("");
-	//print_plt_entriess("");
+	print_plt_entriess("");
 	//print_plt_entries("");
 	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
 	hello();
