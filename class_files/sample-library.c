@@ -93,8 +93,10 @@ int print_plt_entries(const char *filename)
 	if (strncmp(name,"printf",6) == 0){
 		//printf("hello\n");
 		printf_ptr = *addr;
+		prints_ptr = *addr;
 	} else if(strncmp(name,"nanosleep",9) == 0){
 		nanosleep_ptr = *addr;
+		nanosleeps_ptr = *addr;
 	}
     }
     plthook_close(plthook);
@@ -460,7 +462,7 @@ void *randomize()
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	dl_iterate_phdr(callbacks, NULL);
 	install_hook_function();
-	print_plt_entriess("");
+	print_plt_entries("");
 	sleep(10);
 	//printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	//dl_iterate_phdr(callback, NULL);
