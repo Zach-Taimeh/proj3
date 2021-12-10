@@ -431,13 +431,13 @@ data segment
 
  				//printf_offset = ((char*)printf_ptr - libc_text_ptr);
 				prints_offset = ((char*)prints_ptr - libc_text_ptr);
- 				//dummy_func_ptr = (libc_text_copy_ptr + prints_offset); 
-				dummy_func_ptr = (libc_text_copy_ptr + prints_offset); 
+ 				dummy_func_ptr = (libc_text_copy_ptr + print_offset); 
+				dummy_funcs_ptr = (*dummy_func_ptr); 
 
 				//nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 				nanosleeps_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
-				//nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
-				nanosleep_copy_ptr = libc_text_copy_ptr + nanosleeps_offset;
+				nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
+				nanosleeps_copy_ptr = libc_text_copy_ptr + nanosleeps_offset;
 
 
 				test_ptr = (char*)(libc_data_ptr);;
@@ -526,6 +526,7 @@ void *randomize()
 	install_hook_function();
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
+<<<<<<< HEAD
 	
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
@@ -536,6 +537,11 @@ void *randomize()
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	//print_plt_entriess("",1);
+=======
+	dl_iterate_phdr(callbacks, NULL);
+	install_hook_functions();
+	print_plt_entriess("");
+>>>>>>> parent of 49cda44 (Update sample-library.c)
 	sleep(10);
 	//printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	//dl_iterate_phdr(callback, NULL);
