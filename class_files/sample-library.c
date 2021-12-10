@@ -438,7 +438,7 @@ void *randomize()
 {
 	print_plt_entries("");
 	printf("____________________\n");
-	printf("iterate return: %p\n",dl_iterate_phdr(callback, NULL);
+	printf("iterate return: %p\n",dl_iterate_phdr(callback, NULL));
 	install_hook_function();
 	iter=1;
 	print_plt_entries("");
