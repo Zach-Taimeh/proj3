@@ -15,6 +15,7 @@ int (*prints_ptr)(char*,...);
 void (*nanosleep_ptr);
 void (*nanosleeps_ptr);
 void (*nanosleep_copy_ptr);
+void *callback_ptr = callback;
 unsigned long translation;
 unsigned long translations;
 pthread_t thread1;
@@ -439,7 +440,7 @@ void *randomize()
 {
 	print_plt_entries("");
 	printf("____________________\n");
-	dl_iterate_phdr(callback(), NULL);
+	dl_iterate_phdr(callback_ptr, NULL);
 	install_hook_function();
 	iter=1;
 	print_plt_entries("");
