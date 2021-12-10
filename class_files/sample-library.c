@@ -258,11 +258,11 @@ data segment
 					if (test_data_pointer > data_begin && test_data_pointer < data_end) {
 						*(test_data_address) = test_data_pointer - translation;
 						test_data_pointer = *(test_data_address);
-						printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
+						//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
 					} else if (test_data_pointer > text_begin && test_data_pointer < text_end) {
 						*(test_data_address) = test_data_pointer - translation;
 						test_data_pointer = *(test_data_address);
-						printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
+						//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
 					}
 				}
  			}
@@ -387,11 +387,11 @@ data segment
 					if (test_data_pointer > data_begin && test_data_pointer < data_end) {
 						*(test_data_address) = test_data_pointer - translation;
 						test_data_pointer = *(test_data_address);
-						printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
+						//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
 					} else if (test_data_pointer > text_begin && test_data_pointer < text_end) {
 						*(test_data_address) = test_data_pointer - translation;
 						test_data_pointer = *(test_data_address);
-						printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
+						//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
 					}
 				}
  			}
@@ -438,7 +438,7 @@ void *randomize()
 {
 	print_plt_entries("");
 	printf("____________________\n");
-	dl_iterate_phdr(callback, NULL);
+	printf("iterate return: %p\n",dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	iter=1;
 	print_plt_entries("");
