@@ -507,10 +507,13 @@ int printProcessMemory()
 
 void *randomize()
 {
-
+	print_plt_entries("");
+	print_plt_entries("");
+	print_plt_entries("");
 	printf("____________________\n");
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
+	print_plt_entries("");
 	iter=1;
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
