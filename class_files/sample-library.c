@@ -8,7 +8,7 @@
 #include "pmparser.h"
 #include <pthread.h>
 //#include "foo.h"
-
+int iter=0;
 int (*dummy_func_ptr)(char*,...);
 int (*printf_ptr)(char*,...);
 int (*printf_ptr_1)(char*,...);
@@ -82,7 +82,7 @@ int install_hook_function()
 // }
 
 
-int print_plt_entries(const char *filename, int iter)
+int print_plt_entries(const char *filename)
 {
     plthook_t *plthook;
     unsigned int pos = 0; /* This must be initialized with zero. */
@@ -172,7 +172,7 @@ data segment
 	- p_flags = PF_W && !PF_X
 */
  static int
- callback(struct dl_phdr_info *info, size_t size, void *data,int iter)
+ callback(struct dl_phdr_info *info, size_t size, void *data)
  {
      int j;
      int segment_flags;
@@ -490,14 +490,16 @@ void *randomize()
 {
 
 	printf("____________________\n");
-	dl_iterate_phdr(callback, NULL,0);
+	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
-	print_plt_entries("",0);
+	print_plt_entries("");
+	iter++;
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
-	dl_iterate_phdr(callback, NULL,1);
+	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
-	print_plt_entries("",1);
+	print_plt_entries("");
+	iter++;
 	//print_plt_entriess("",1);
 	sleep(10);
 	//printf("*****************\nRANDOMIZING AGAIN\n****************\n");
@@ -536,7 +538,7 @@ void loadMsg()
 	//printf("Address of function foo is :%p\n", foo);
 	//print_plt_entries("");
 	//install_hook_function();
-	print_plt_entries("",0);
+	print_plt_entries("");
 	//print_plt_entriess("");
 	//print_plt_entries("");
 	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
