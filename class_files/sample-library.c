@@ -279,7 +279,7 @@ data segment
 				// printf("dummy func addr: %p\n",dummy_func_ptr);
 				// printf("dummy funcs addr: %p\n",dummy_funcs_ptr);
 				// printf("printf_ptr: %p\n",(char*)printf_ptr);
-				// printf("printf_offset: %i\n",printf_offset);
+				printf("printf_offset: %p\n",printf_offset);
 				// printf("prints_ptr: %p\n",(char*)prints_ptr);
 				// printf("prints_offset: %i\n",prints_offset);
 				switch(iter){
@@ -511,8 +511,8 @@ void *randomize()
 	printf("____________________\n");
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
-	print_plt_entries("");
 	iter=1;
+	print_plt_entries("");
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	print_plt_entries("");
