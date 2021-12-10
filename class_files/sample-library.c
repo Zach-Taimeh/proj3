@@ -249,8 +249,10 @@ data segment
 
  				printf_offset = ((char*)printf_ptr - libc_text_ptr);
 				//prints_offset = ((char*)prints_ptr - libc_text_ptr);
+				printf("iter is: %i \n", iter);
 				switch(iter){
 					case 0:
+						printf("case 1 is: %i \n", iter);
 						printf_offset = ((char*)printf_ptr - libc_text_ptr);
 					case 1:
 						printf_offset = ((char*)printf_ptr_1 - libc_text_ptr);
