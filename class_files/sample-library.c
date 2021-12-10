@@ -10,13 +10,11 @@
 //#include "foo.h"
 
 int (*dummy_func_ptr)(char*,...);
-int (*dummy_funcs_ptr)(char*,...);
 int (*printf_ptr)(char*,...);
 int (*prints_ptr)(char*,...);
 void (*nanosleep_ptr);
 void (*nanosleeps_ptr);
 void (*nanosleep_copy_ptr);
-void (*nanosleeps_copy_ptr);
 unsigned long translation;
 pthread_t thread1;
 int rt1;
@@ -75,6 +73,7 @@ int print_plt_entries(const char *filename)
 			//printf("hello\n");
 			if(iter==0){
 				printf("updating ptrs\n");
+				printf("addr: %p\n", addr);
 				printf_ptr = *addr;
 				prints_ptr = *addr;
 			}
