@@ -117,6 +117,7 @@ data segment
  callback(struct dl_phdr_info *info, size_t size, void *data)
  {
 	 printf("start cb Printf_ptr: %p\n",printf_ptr);
+	 printf("start cb Prints_ptr: %p\n",prints_ptr);
      int j;
      int segment_flags;
      int flags_mask = 3; // mask for PF_W and PF_X
@@ -190,26 +191,30 @@ data segment
 				translation = libc_text_ptr-libc_text_copy_ptr;
 				// dummy_func and nanosleep_copy
 				printf("callback Libc text ptr: %p\n", libc_text_ptr);
- 				printf_offset = ((char*)printf_ptr - libc_text_ptr);
+ 				//printf_offset = ((char*)printf_ptr - libc_text_ptr);
 				//prints_offset = ((char*)prints_ptr - libc_text_ptr);
 				if(iter==0){
 					printf_offset = ((char*)printf_ptr - libc_text_ptr);
  					dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
 					nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
+					printf("Printf_ptr: %p\n",printf_ptr);
+					printf("printf_offset: %p\n",printf_offset);
 				}
 				if(iter==1){
 					printf_offset = ((char*)prints_ptr - libc_text_ptr);
 					dummy_func_ptr = (libc_text_copy_ptr + prints_offset); 
 					nanosleep_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
 					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
+					printf("Prints_ptr: %p\n",prints_ptr);
+					printf("prints_offset: %p\n",printf_offset);
 				}
 				//dummy_funcs_ptr = (*dummy_func_ptr); 
 				// printf("dummy func addr: %p\n",dummy_func_ptr);
 				// printf("dummy funcs addr: %p\n",dummy_funcs_ptr);
 				// printf("printf_ptr: %p\n",(char*)printf_ptr);
-				printf("Printf_ptr: %p\n",printf_ptr);
-				printf("printf_offset: %p\n",printf_offset);
+				//printf("Printf_ptr: %p\n",printf_ptr);
+				//printf("printf_offset: %p\n",printf_offset);
 				// printf("prints_ptr: %p\n",(char*)prints_ptr);
 				// printf("prints_offset: %i\n",prints_offset);
 				//nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
