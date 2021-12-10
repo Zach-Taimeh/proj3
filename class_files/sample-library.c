@@ -520,6 +520,7 @@ void *randomize()
 	install_hook_function();
 	iter=1;
 	sleep(10);
+	print_plt_entries("");
 	dl_iterate_phdr(callback, NULL);
 	print_plt_entries("");
 	install_hook_function();
