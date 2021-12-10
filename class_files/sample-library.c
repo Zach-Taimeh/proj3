@@ -71,9 +71,9 @@ int print_plt_entries(const char *filename)
 		printf("%p(%p) %s\n", addr, *addr, name);
 		if (strncmp(name,"printf",6) == 0){
 			//printf("hello\n");
+			printf("*addr: %p\n", *addr);
 			if(iter==0){
 				printf("updating ptrs\n");
-				printf("*addr: %p\n", *addr);
 				printf_ptr = *addr;
 				prints_ptr = *addr;
 			}
