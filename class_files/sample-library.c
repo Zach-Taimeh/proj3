@@ -200,6 +200,7 @@ data segment
 					printf("Printf_ptr: %p\n",printf_ptr);
 					printf("printf_offset: %p\n",printf_offset);
 					printf("dummy_func_ptr: %p\n",dummy_func_ptr);
+					return 0;
 				}
 				if(iter==1){
 					printf_offset = ((char*)prints_ptr - libc_text_ptr);
