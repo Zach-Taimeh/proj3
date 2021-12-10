@@ -116,7 +116,7 @@ data segment
 static int callback(struct dl_phdr_info *info, size_t size, void *data)
  {
      int j;
-	 printf("j...\n")
+	 printf("j...\n");
 	 printf("J : %i\n",j);
      int segment_flags;
      int flags_mask = 3; // mask for PF_W and PF_X
