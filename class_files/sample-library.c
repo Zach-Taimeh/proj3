@@ -270,6 +270,7 @@ data segment
 				nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 				switch(iter){
 					case 0:
+						printf("Case 0\n");
 						nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 					case 1:
 						nanosleep_offset = ((char*)nanosleep_ptr_1 - libc_text_ptr);
