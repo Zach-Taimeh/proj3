@@ -119,7 +119,7 @@ data segment
 	 if(iter==0)
 	 	printf("Iter=0\n");
 	 if(iter==1)
-	 	printf(iter=1\n);
+	 	printf("iter=1\n");
 	 printf("start cb Printf_ptr: %p\n",printf_ptr);
 	 printf("start cb Prints_ptr: %p\n",prints_ptr);
      int j;
