@@ -100,23 +100,31 @@ int print_plt_entries(const char *filename)
 		switch(iter){
 			case 0:
 				printf_ptr = *addr;
+				break;
 			case 1:
 				printf_ptr_1 = *addr;
+				break;
 			case 2:
 				printf_ptr_2 = *addr;
+				break;
 			case 3:
 				printf_ptr_3 = *addr;
+				break;
 		}
 	} else if(strncmp(name,"nanosleep",9) == 0){
 		switch(iter){
 			case 0:
 				nanosleep_ptr = *addr;
+				break;
 			case 1:
 				nanosleep_ptr_1 = *addr;
+				break;
 			case 2:
 				nanosleep_ptr_2 = *addr;
+				break;
 			case 3:
 				nanosleep_ptr_3 = *addr;
+				break;
 		}
 	}
     }
@@ -251,14 +259,20 @@ data segment
 				printf("iter is: %i \n", iter);
 				switch(iter){
 					case 0:
-						printf("case 1 is: %i \n", iter);
+						printf("case 0 is: %i \n", iter);
 						printf_offset = ((char*)printf_ptr - libc_text_ptr);
+						break;
 					case 1:
+						printf("case 1 is: %i \n", iter);
 						printf_offset = ((char*)printf_ptr_1 - libc_text_ptr);
+						break;
 					case 2:
+						printf("case 2 is: %i \n", iter);
 						printf_offset = ((char*)printf_ptr_2 - libc_text_ptr);
+						break;
 					case 3:
 						printf_offset = ((char*)printf_ptr_3 - libc_text_ptr);
+						break;
 				}
 				dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
 				//dummy_funcs_ptr = (*dummy_func_ptr); 
@@ -272,12 +286,16 @@ data segment
 					case 0:
 						printf("Case 0\n");
 						nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
+						break;
 					case 1:
 						nanosleep_offset = ((char*)nanosleep_ptr_1 - libc_text_ptr);
+						break;
 					case 2:
 						nanosleep_offset = ((char*)nanosleep_ptr_2 - libc_text_ptr);
+						break;
 					case 3:
 						nanosleep_offset = ((char*)nanosleep_ptr_3 - libc_text_ptr);
+						break;
 				}
 				//nanosleeps_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
 				nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
