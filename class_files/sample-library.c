@@ -223,7 +223,7 @@ data segment
 
 				translation = libc_text_ptr-libc_text_copy_ptr;
 				// dummy_func and nanosleep_copy
-
+				printf("callback Libc text ptr: %p", libc_text_ptr);
  				printf_offset = ((char*)printf_ptr - libc_text_ptr);
 				//prints_offset = ((char*)prints_ptr - libc_text_ptr);
  				dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
@@ -231,7 +231,7 @@ data segment
 				// printf("dummy func addr: %p\n",dummy_func_ptr);
 				// printf("dummy funcs addr: %p\n",dummy_funcs_ptr);
 				// printf("printf_ptr: %p\n",(char*)printf_ptr);
-				 printf("printf_offset: %p\n",printf_offset);
+				printf("printf_offset: %p\n",printf_offset);
 				// printf("prints_ptr: %p\n",(char*)prints_ptr);
 				// printf("prints_offset: %i\n",prints_offset);
 				nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
@@ -360,8 +360,9 @@ data segment
 				// dummy_func and nanosleep_copy
 
  				//printf_offset = ((char*)printf_ptr - libc_text_ptr);
+				printf("callbacks Libc text ptr: %p", libc_text_ptr);
 				prints_offset = ((char*)prints_ptr - libc_text_ptr);
-				printf("callbackSS printf_offset: %p\n",printf_offset);
+				
 				printf("prints_offset: %p\n",prints_offset);
  				//dummy_func_ptr = (libc_text_copy_ptr + prints_offset); 
 				dummy_func_ptr = (libc_text_copy_ptr + prints_offset); 
