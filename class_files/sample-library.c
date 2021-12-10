@@ -189,7 +189,7 @@ static int callback(struct dl_phdr_info *info, size_t size, void *data)
 				memcpy((libc_text_copy_ptr+data_segment_offset),libc_data_ptr,data_size);
 
 				translation = libc_text_ptr-libc_text_copy_ptr;
-				printf("Translation: %p\n",translation)
+				printf("Translation: %p\n",translation);
 				// dummy_func and nanosleep_copy
 				printf("callback Libc text ptr: %p\n", libc_text_ptr);
  				//printf_offset = ((char*)printf_ptr - libc_text_ptr);
