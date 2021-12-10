@@ -345,6 +345,7 @@ static int
 				memcpy((libc_text_copy_ptr+data_segment_offset),libc_data_ptr,data_size);
 
 				translation = libc_text_ptr-libc_text_copy_ptr;
+				printf("Translation cbs: %p\n",translation);
 				// dummy_func and nanosleep_copy
 
  				//printf_offset = ((char*)printf_ptr - libc_text_ptr);
