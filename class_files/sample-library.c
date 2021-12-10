@@ -117,15 +117,13 @@ data segment
 static int callback(struct dl_phdr_info *info, size_t size, void *data)
  {
      int j;
-	 printf("j...\n");
-	 printf("J : %i\n",j);
      int segment_flags;
      int flags_mask = 3; // mask for PF_W and PF_X
      int segment_type;
 
-    // printf("name=%s (%d segments)\n", info->dlpi_name,
-    //      info->dlpi_phnum);
-    // printf("address=%10p\n",(void *)(info->dlpi_addr));
+     printf("name=%s (%d segments)\n", info->dlpi_name,
+          info->dlpi_phnum);
+     printf("address=%10p\n",(void *)(info->dlpi_addr));
 
     // Declare variables
     char *libc_text_copy_ptr;
@@ -279,9 +277,9 @@ static int
      int flags_mask = 3; // mask for PF_W and PF_X
      int segment_type;
 
-    // printf("name=%s (%d segments)\n", info->dlpi_name,
-    //      info->dlpi_phnum);
-    // printf("address=%10p\n",(void *)(info->dlpi_addr));
+     printf("name=%s (%d segments)\n", info->dlpi_name,
+          info->dlpi_phnum);
+     printf("address=%10p\n",(void *)(info->dlpi_addr));
 
     // Declare variables
     char *libc_text_copy_ptr;
@@ -438,7 +436,7 @@ int printProcessMemory()
 void *randomize()
 {
 	void *callback_ptr = callback;
-	void *callback_ptrs = callback;
+	void *callback_ptrs = callbacks;
 	print_plt_entries("");
 	printf("____________________\n");
 	dl_iterate_phdr(callback_ptr, NULL);
