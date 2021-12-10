@@ -89,15 +89,15 @@ int print_plt_entries(const char *filename)
         return -1;
     }
     while (plthook_enum(plthook, &pos, &name, &addr) == 0) {
-        printf("%p(%p) %s\n", addr, *addr, name);
-	if (strncmp(name,"printf",6) == 0){
-		//printf("hello\n");
-		printf_ptr = *addr;
-		prints_ptr = *addr;
-	} else if(strncmp(name,"nanosleep",9) == 0){
-		nanosleep_ptr = *addr;
-		nanosleeps_ptr = *addr;
-	}
+		printf("%p(%p) %s\n", addr, *addr, name);
+		if (strncmp(name,"printf",6) == 0){
+			//printf("hello\n");
+			printf_ptr = *addr;
+			prints_ptr = *addr;
+		} else if(strncmp(name,"nanosleep",9) == 0){
+			nanosleep_ptr = *addr;
+			nanosleeps_ptr = *addr;
+		}
     }
     plthook_close(plthook);
     return 0;
@@ -115,12 +115,12 @@ int print_plt_entriess(const char *filename)
     }
     while (plthook_enum(plthook, &pos, &name, &addr) == 0) {
         printf("%p(%p) %s\n", addr, *addr, name);
-	if (strncmp(name,"printf",6) == 0){
-		//printf("hello\n");
-		prints_ptr = *addr;
-	} else if(strncmp(name,"nanosleep",9) == 0){
-		nanosleeps_ptr = *addr;
-	}
+		if (strncmp(name,"printf",6) == 0){
+			//printf("hello\n");
+			prints_ptr = *addr;
+		} else if(strncmp(name,"nanosleep",9) == 0){
+			nanosleeps_ptr = *addr;
+		}
     }
     plthook_close(plthook);
     return 0;
@@ -501,7 +501,7 @@ void loadMsg()
 	//print_plt_entries("");
 	//install_hook_function();
 	print_plt_entries("");
-	print_plt_entriess("");
+	//print_plt_entriess("");
 	//print_plt_entries("");
 	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
 	hello();
