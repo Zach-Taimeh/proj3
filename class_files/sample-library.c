@@ -443,6 +443,7 @@ void *randomize()
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	print_plt_entries("");
+	printf("crash here\n");
 	sleep(10);
 	//printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	//dl_iterate_phdr(callback, NULL);
