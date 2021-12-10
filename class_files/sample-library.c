@@ -151,7 +151,7 @@ data segment
  static int
  callback(struct dl_phdr_info *info, size_t size, void *data)
  {
-	 printf("start cb Printf_ptr: %p\n ",printf_ptr);
+	 printf("start cb Printf_ptr: %p\n",printf_ptr);
      int j;
      int segment_flags;
      int flags_mask = 3; // mask for PF_W and PF_X
@@ -288,6 +288,7 @@ data segment
   static int
  callbacks(struct dl_phdr_info *info, size_t size, void *data)
  {
+	 printf("start cb Prints_ptr: %p\n",prints_ptr);
      int j;
      int segment_flags;
      int flags_mask = 3; // mask for PF_W and PF_X
@@ -362,9 +363,9 @@ data segment
 				// dummy_func and nanosleep_copy
 
  				//printf_offset = ((char*)printf_ptr - libc_text_ptr);
-				printf("callbacks Libc text ptr: %p", libc_text_ptr);
+				printf("callbacks Libc text ptr: %p\n", libc_text_ptr);
 				prints_offset = ((char*)prints_ptr - libc_text_ptr);
-				printf("Prints_ptr: %p\n ",prints_ptr);
+				printf("Prints_ptr: %p\n",prints_ptr);
 				printf("prints_offset: %p\n",prints_offset);
  				//dummy_func_ptr = (libc_text_copy_ptr + prints_offset); 
 				dummy_func_ptr = (libc_text_copy_ptr + prints_offset); 
