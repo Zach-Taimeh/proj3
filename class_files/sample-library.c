@@ -268,7 +268,7 @@ data segment
  			}
  		}
  	}
-    return 1;
+    return 0;
  }
   static int
  callbacks(struct dl_phdr_info *info, size_t size, void *data)
