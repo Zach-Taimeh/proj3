@@ -73,7 +73,7 @@ int print_plt_entries(const char *filename)
 			//printf("hello\n");
 			if(iter==0){
 				printf("updating ptrs\n");
-				printf("addr: %p\n", &addr);
+				printf("*addr: %p\n", *addr);
 				printf_ptr = *addr;
 				prints_ptr = *addr;
 			}
