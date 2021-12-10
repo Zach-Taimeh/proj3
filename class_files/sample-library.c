@@ -452,13 +452,13 @@ void *randomize()
 	printf("____________________\n");
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
-	print_plt_entriess("");
+	print_plt_entries("");
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
+	print_plt_entriess("");
 	dl_iterate_phdr(callbacks, NULL);
 	install_hook_function();
 	//print_plt_entries("");
-	print_plt_entriess("");
 	sleep(10);
 	//printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	//dl_iterate_phdr(callback, NULL);
