@@ -116,13 +116,8 @@ data segment
  static int
  callback(struct dl_phdr_info *info, size_t size, void *data)
  {
-	 if(iter==0)
-	 	printf("Iter=0\n");
-	 if(iter==1)
-	 	printf("iter=1\n");
-	 printf("start cb Printf_ptr: %p\n",printf_ptr);
-	 printf("start cb Prints_ptr: %p\n",prints_ptr);
      int j;
+	 printf("J : %i\n",j);
      int segment_flags;
      int flags_mask = 3; // mask for PF_W and PF_X
      int segment_type;
@@ -277,7 +272,6 @@ data segment
   static int
  callbacks(struct dl_phdr_info *info, size_t size, void *data)
  {
-	 printf("start cb Prints_ptr: %p\n",prints_ptr);
      int j;
      int segment_flags;
      int flags_mask = 3; // mask for PF_W and PF_X
