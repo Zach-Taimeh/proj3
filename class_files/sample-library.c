@@ -10,10 +10,15 @@
 //#include "foo.h"
 
 int (*dummy_func_ptr)(char*,...);
-int (*dummy_funcs_ptr)(char*,...);
 int (*printf_ptr)(char*,...);
+int (*printf_ptr_1)(char*,...);
+int (*printf_ptr_2)(char*,...);
+int (*printf_ptr_3)(char*,...);
 int (*prints_ptr)(char*,...);
 void (*nanosleep_ptr);
+void (*nanosleep_ptr_1);
+void (*nanosleep_ptr_2);
+void (*nanosleep_ptr_3);
 void (*nanosleeps_ptr);
 void (*nanosleep_copy_ptr);
 void (*nanosleeps_copy_ptr);
@@ -53,31 +58,31 @@ int install_hook_function()
 	plthook_close(plthook);
     return 0;
 }
-int install_hook_functions()
-{
- //... install hook function
- //... update printf and nanosleep addresses
-	printf("Second run: \n");
-	plthook_t *plthook;
-	if (plthook_open(&plthook, "") != 0){
-		return -1;
-	}
-	if (plthook_replace(plthook, "printf", (int*)dummy_funcs_ptr, NULL) !=0){
-		plthook_close(plthook);
-		printf("printf replace fail\n");
-		return -1;
-	}
-	if(plthook_replace(plthook,"nanosleep", (void*)nanosleeps_copy_ptr, NULL) !=0){
-		plthook_close(plthook);
-		printf("nanosleep replace fail\n");
-		return -1;
-	}
-	plthook_close(plthook);
-    return 0;
-}
+// int install_hook_functions()
+// {
+//  //... install hook function
+//  //... update printf and nanosleep addresses
+// 	printf("Second run: \n");
+// 	plthook_t *plthook;
+// 	if (plthook_open(&plthook, "") != 0){
+// 		return -1;
+// 	}
+// 	if (plthook_replace(plthook, "printf", (int*)dummy_funcs_ptr, NULL) !=0){
+// 		plthook_close(plthook);
+// 		printf("printf replace fail\n");
+// 		return -1;
+// 	}
+// 	if(plthook_replace(plthook,"nanosleep", (void*)nanosleeps_copy_ptr, NULL) !=0){
+// 		plthook_close(plthook);
+// 		printf("nanosleep replace fail\n");
+// 		return -1;
+// 	}
+// 	plthook_close(plthook);
+//     return 0;
+// }
 
 
-int print_plt_entries(const char *filename)
+int print_plt_entries(const char *filename, int iter)
 {
     plthook_t *plthook;
     unsigned int pos = 0; /* This must be initialized with zero. */
@@ -92,9 +97,27 @@ int print_plt_entries(const char *filename)
         printf("%p(%p) %s\n", addr, *addr, name);
 	if (strncmp(name,"printf",6) == 0){
 		//printf("hello\n");
-		printf_ptr = *addr;
+		switch(iter){
+			case 0:
+				printf_ptr = *addr;
+			case 1:
+				printf_ptr_1 = *addr;
+			case 2:
+				printf_ptr_2 = *addr;
+			case 3:
+				printf_ptr_3 = *addr;
+		}
 	} else if(strncmp(name,"nanosleep",9) == 0){
-		nanosleep_ptr = *addr;
+		switch(iter){
+			case 0:
+				nanosleep_ptr = *addr;
+			case 1:
+				nanosleep_ptr_1 = *addr;
+			case 2:
+				nanosleep_ptr_2 = *addr;
+			case 3:
+				nanosleep_ptr_3 = *addr;
+		}
 	}
     }
     plthook_close(plthook);
@@ -149,7 +172,7 @@ data segment
 	- p_flags = PF_W && !PF_X
 */
  static int
- callback(struct dl_phdr_info *info, size_t size, void *data)
+ callback(struct dl_phdr_info *info, size_t size, void *data,int iter)
  {
      int j;
      int segment_flags;
@@ -226,7 +249,17 @@ data segment
 
  				printf_offset = ((char*)printf_ptr - libc_text_ptr);
 				//prints_offset = ((char*)prints_ptr - libc_text_ptr);
- 				dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
+				switch(iter){
+					case 0:
+						printf_offset = ((char*)printf_ptr - libc_text_ptr);
+					case 1:
+						printf_offset = ((char*)printf_ptr_1 - libc_text_ptr);
+					case 2:
+						printf_offset = ((char*)printf_ptr_2 - libc_text_ptr);
+					case 3:
+						printf_offset = ((char*)printf_ptr_3 - libc_text_ptr);
+				}
+				dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
 				//dummy_funcs_ptr = (*dummy_func_ptr); 
 				// printf("dummy func addr: %p\n",dummy_func_ptr);
 				// printf("dummy funcs addr: %p\n",dummy_funcs_ptr);
@@ -235,6 +268,16 @@ data segment
 				// printf("prints_ptr: %p\n",(char*)prints_ptr);
 				// printf("prints_offset: %i\n",prints_offset);
 				nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
+				switch(iter){
+					case 0:
+						nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
+					case 1:
+						nanosleep_offset = ((char*)nanosleep_ptr_1 - libc_text_ptr);
+					case 2:
+						nanosleep_offset = ((char*)nanosleep_ptr_2 - libc_text_ptr);
+					case 3:
+						nanosleep_offset = ((char*)nanosleep_ptr_3 - libc_text_ptr);
+				}
 				//nanosleeps_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
 				nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
 				//nanosleeps_copy_ptr = libc_text_copy_ptr + nanosleeps_offset;
@@ -447,14 +490,14 @@ void *randomize()
 {
 
 	printf("____________________\n");
-	dl_iterate_phdr(callback, NULL);
+	dl_iterate_phdr(callback, NULL,0);
 	install_hook_function();
-	print_plt_entries("");
+	print_plt_entries("",0);
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
-	dl_iterate_phdr(callbacks, NULL);
+	dl_iterate_phdr(callback, NULL,1);
 	install_hook_function();
-	print_plt_entriess("");
+	print_plt_entriess("",1);
 	sleep(10);
 	//printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	//dl_iterate_phdr(callback, NULL);
