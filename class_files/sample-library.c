@@ -497,7 +497,8 @@ void *randomize()
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	dl_iterate_phdr(callback, NULL,1);
 	install_hook_function();
-	print_plt_entriess("",1);
+	print_plt_entries("",1);
+	//print_plt_entriess("",1);
 	sleep(10);
 	//printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	//dl_iterate_phdr(callback, NULL);
@@ -535,8 +536,8 @@ void loadMsg()
 	//printf("Address of function foo is :%p\n", foo);
 	//print_plt_entries("");
 	//install_hook_function();
-	print_plt_entries("");
-	print_plt_entriess("");
+	print_plt_entries("",0);
+	//print_plt_entriess("");
 	//print_plt_entries("");
 	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
 	hello();
