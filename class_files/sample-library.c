@@ -204,7 +204,7 @@ data segment
 				if(iter==1){
 					printf_offset = ((char*)prints_ptr - libc_text_ptr);
 					dummy_func_ptr = (libc_text_copy_ptr + prints_offset); 
-					nanosleep_offset = ((int*)nanosleeps_ptr - libc_text_ptr);
+					nanosleep_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
 					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
 					printf("Prints_ptr: %p\n",prints_ptr);
 					printf("prints_offset: %p\n",printf_offset);
@@ -354,7 +354,7 @@ data segment
 				dummy_func_ptr = (libc_text_copy_ptr + prints_offset); 
 
 				//nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
-				nanosleeps_offset = ((int*)nanosleeps_ptr - libc_text_ptr);
+				nanosleeps_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
 				//nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
 				nanosleep_copy_ptr = libc_text_copy_ptr + nanosleeps_offset;
 
