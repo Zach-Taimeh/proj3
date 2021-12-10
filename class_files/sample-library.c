@@ -129,6 +129,10 @@ int print_plt_entries(const char *filename)
 	}
     }
     plthook_close(plthook);
+	printf("**printf_ptr: %p\n",printf_ptr);
+	printf("**printf_ptr_1: %p\n",printf_ptr_1);
+	printf("**printf_ptr_2: %p\n",printf_ptr_2);
+	printf("**printf_ptr_3: %p\n",printf_ptr_3);
     return 0;
 }
 int print_plt_entriess(const char *filename)
@@ -280,6 +284,10 @@ data segment
 				// printf("dummy funcs addr: %p\n",dummy_funcs_ptr);
 				// printf("printf_ptr: %p\n",(char*)printf_ptr);
 				printf("printf_offset: %p\n",printf_offset);
+				printf("printf_ptr: %p\n",printf_ptr);
+				printf("printf_ptr_1: %p\n",printf_ptr_1);
+				printf("printf_ptr_2: %p\n",printf_ptr_2);
+				printf("printf_ptr_3: %p\n",printf_ptr_3);
 				// printf("prints_ptr: %p\n",(char*)prints_ptr);
 				// printf("prints_offset: %i\n",prints_offset);
 				switch(iter){
