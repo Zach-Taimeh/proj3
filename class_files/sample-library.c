@@ -247,7 +247,6 @@ data segment
 				translation = libc_text_ptr-libc_text_copy_ptr;
 				// dummy_func and nanosleep_copy
 
- 				printf_offset = ((char*)printf_ptr - libc_text_ptr);
 				//prints_offset = ((char*)prints_ptr - libc_text_ptr);
 				printf("iter is: %i \n", iter);
 				switch(iter){
@@ -269,7 +268,6 @@ data segment
 				// printf("printf_offset: %i\n",printf_offset);
 				// printf("prints_ptr: %p\n",(char*)prints_ptr);
 				// printf("prints_offset: %i\n",prints_offset);
-				nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 				switch(iter){
 					case 0:
 						printf("Case 0\n");
@@ -496,13 +494,13 @@ void *randomize()
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	print_plt_entries("");
-	iter++;
+	iter=1;
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	print_plt_entries("");
-	iter++;
+	iter=2;
 	//print_plt_entriess("",1);
 	sleep(10);
 	//printf("*****************\nRANDOMIZING AGAIN\n****************\n");
