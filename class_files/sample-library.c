@@ -35,6 +35,7 @@ static int my_foo(int var)
 
 int install_hook_function()
 {
+	iter=1;
  //... install hook function
  //... update printf and nanosleep addresses
 	plthook_t *plthook;
