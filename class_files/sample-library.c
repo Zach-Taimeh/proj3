@@ -74,6 +74,7 @@ int print_plt_entries(const char *filename)
 		if (strncmp(name,"printf",6) == 0){
 			//printf("hello\n");
 			if(iter==0){
+				printf("updating ptrs\n");
 				printf_ptr = *addr;
 				prints_ptr = *addr;
 			}
