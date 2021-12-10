@@ -366,7 +366,7 @@ data segment
 				printf("libc text copy ptr:%p \n",libc_text_copy_ptr);
  				//dummy_func_ptr = (libc_text_copy_ptr + prints_offset); 
 				dummy_func_ptr = (libc_text_copy_ptr + prints_offset); 
-
+//wat
 				//nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 				nanosleeps_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
 				//nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
