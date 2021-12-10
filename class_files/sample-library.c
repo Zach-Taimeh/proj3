@@ -268,7 +268,7 @@ data segment
  			}
  		}
  	}
-    return 0;
+    return 1;
  }
   static int
  callbacks(struct dl_phdr_info *info, size_t size, void *data)
@@ -444,7 +444,7 @@ void *randomize()
 	print_plt_entries("");
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
-	dl_iterate_phdr(callbacks, NULL);
+	dl_iterate_phdr(callback, NULL);
 	print_plt_entries("");
 	install_hook_function();
 	sleep(10);
