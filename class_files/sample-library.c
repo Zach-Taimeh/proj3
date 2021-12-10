@@ -523,7 +523,7 @@ void *randomize()
 	print_plt_entries("");
 	dl_iterate_phdr(callback, NULL);
 	print_plt_entries("");
-	install_hook_function();
+	install_hook_function();as
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 <<<<<<< HEAD
