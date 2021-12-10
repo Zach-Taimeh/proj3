@@ -113,7 +113,7 @@ data segment
 	- p_type = PT_LOAD
 	- p_flags = PF_W && !PF_X
 */
- static int
+int
  callback(struct dl_phdr_info *info, size_t size, void *data)
  {
      int j;
@@ -195,7 +195,7 @@ data segment
 				if(iter==0){
 					printf_offset = ((char*)printf_ptr - libc_text_ptr);
  					dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
-					nanosleep_offset = ((int*)nanosleep_ptr - libc_text_ptr);
+					nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
 					printf("Printf_ptr: %p\n",printf_ptr);
 					printf("printf_offset: %p\n",printf_offset);
@@ -269,7 +269,7 @@ data segment
  	}
     return 0;
  }
-  static int
+static int
  callbacks(struct dl_phdr_info *info, size_t size, void *data)
  {
      int j;
@@ -442,7 +442,7 @@ void *randomize()
 	print_plt_entries("");
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
-	dl_iterate_phdr(callbacks, NULL);
+	dl_iterate_phdr(callback, NULL);
 	print_plt_entries("");
 	install_hook_function();
 	sleep(10);
