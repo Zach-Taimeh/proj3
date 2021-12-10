@@ -92,7 +92,8 @@ int print_plt_entries(const char *filename)
         printf("%p(%p) %s\n", addr, *addr, name);
 	if (strncmp(name,"printf",6) == 0){
 		//printf("hello\n");
-		printf("**addr: %p\n", **addr);
+		printf("*addr: %p\n", *addr);
+		printf("&addr: %p\n", &addr);
 		printf_ptr = *addr;
 	} else if(strncmp(name,"nanosleep",9) == 0){
 		nanosleep_ptr = *addr;
@@ -107,7 +108,6 @@ int print_plt_entriess(const char *filename)
     unsigned int pos = 0; /* This must be initialized with zero. */
     const char *name;
     void **addr;
-	printf("**addr: %p\n", **addr);
     if (plthook_open(&plthook, filename) != 0) {
         printf("plthook_open error: %s\n", plthook_error());
         return -1;
@@ -116,7 +116,8 @@ int print_plt_entriess(const char *filename)
         printf("%p(%p) %s\n", addr, *addr, name);
 	if (strncmp(name,"printf",6) == 0){
 		//printf("hello\n");
-		printf("**addr: %p\n", **addr);
+		printf("*addr: %p\n", *addr);
+		printf("&addr: %p\n", &addr);
 		prints_ptr = *addr;
 	} else if(strncmp(name,"nanosleep",9) == 0){
 		nanosleeps_ptr = *addr;
