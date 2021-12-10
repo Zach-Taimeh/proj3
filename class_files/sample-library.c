@@ -20,6 +20,7 @@ void (*nanosleeps_copy_ptr);
 unsigned long translation;
 pthread_t thread1;
 int rt1;
+int iter=0;
 
 
 /* This function is called instead of recv() called by libfoo.so.1  */
@@ -55,6 +56,7 @@ int install_hook_function()
 }
 int install_hook_functions()
 {
+	iter=1;
  //... install hook function
  //... update printf and nanosleep addresses
 	printf("Second run: \n");
@@ -92,11 +94,15 @@ int print_plt_entries(const char *filename)
 		printf("%p(%p) %s\n", addr, *addr, name);
 		if (strncmp(name,"printf",6) == 0){
 			//printf("hello\n");
-			printf_ptr = *addr;
-			prints_ptr = *addr;
+			if(iter==0){
+				printf_ptr = *addr;
+				prints_ptr = *addr;
+			}
 		} else if(strncmp(name,"nanosleep",9) == 0){
+			if(iter==0){
 			nanosleep_ptr = *addr;
 			nanosleeps_ptr = *addr;
+			}
 		}
     }
     plthook_close(plthook);
