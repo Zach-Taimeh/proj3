@@ -438,6 +438,7 @@ int printProcessMemory()
 void *randomize()
 {
 	void *callback_ptr = callback;
+	void *callback_ptrs = callback;
 	print_plt_entries("");
 	printf("____________________\n");
 	dl_iterate_phdr(callback_ptr, NULL);
@@ -446,7 +447,7 @@ void *randomize()
 	print_plt_entries("");
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
-	dl_iterate_phdr(callbacks, NULL);
+	dl_iterate_phdr(callback_ptrs, NULL);
 	print_plt_entries("");
 	install_hook_function();
 	sleep(10);
