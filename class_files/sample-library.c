@@ -77,10 +77,16 @@ int print_plt_entries(const char *filename)
 				printf_ptr = *addr;
 				prints_ptr = *addr;
 			}
+			if(iter==1){
+				printf_ptr = *addr;
+			}
 		} else if(strncmp(name,"nanosleep",9) == 0){
 			if(iter==0){
 				nanosleep_ptr = *addr;
 				nanosleeps_ptr = *addr;
+			}
+			if(iter==1){
+				nanosleep_ptr = *addr;
 			}
 		}
     }
