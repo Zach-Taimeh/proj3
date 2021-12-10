@@ -73,14 +73,14 @@ int print_plt_entries(const char *filename)
 			//printf("hello\n");
 			if(iter==0){
 				printf("updating ptrs\n");
-				printf("addr: %p\n", addr);
+				printf("addr: %p\n", &addr);
 				printf_ptr = *addr;
 				prints_ptr = *addr;
 			}
 		} else if(strncmp(name,"nanosleep",9) == 0){
 			if(iter==0){
-			nanosleep_ptr = *addr;
-			nanosleeps_ptr = *addr;
+				nanosleep_ptr = *addr;
+				nanosleeps_ptr = *addr;
 			}
 		}
     }
@@ -432,17 +432,17 @@ int printProcessMemory()
 
 void *randomize()
 {
-
+	print_plt_entries("");
 	printf("____________________\n");
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	print_plt_entries("");
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
+	print_plt_entries("");
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	print_plt_entries("");
-	printf("crash here\n");
 	sleep(10);
 	//printf("*****************\nRANDOMIZING AGAIN\n****************\n");
 	//dl_iterate_phdr(callback, NULL);
@@ -480,7 +480,6 @@ void loadMsg()
 	//printf("Address of function foo is :%p\n", foo);
 	//print_plt_entries("");
 	//install_hook_function();
-	print_plt_entries("");
 	//print_plt_entriess("");
 	//print_plt_entries("");
 	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
