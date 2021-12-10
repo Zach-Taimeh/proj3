@@ -96,36 +96,46 @@ int print_plt_entries(const char *filename)
     while (plthook_enum(plthook, &pos, &name, &addr) == 0) {
         printf("%p(%p) %s\n", addr, *addr, name);
 	if (strncmp(name,"printf",6) == 0){
-		//printf("hello\n");
-		switch(iter){
-			case 0:
 				printf_ptr = *addr;
-				break;
-			case 1:
 				printf_ptr_1 = *addr;
-				break;
-			case 2:
 				printf_ptr_2 = *addr;
-				break;
-			case 3:
-				printf_ptr_3 = *addr;
-				break;
-		}
+		//printf("hello\n");
+		// switch(iter){
+		// 	case 0:
+		// 		printf_ptr = *addr;
+		// 		printf_ptr_1 = *addr;
+		// 		printf_ptr_2 = *addr;
+		// 		break;
+		// 	case 1:
+		// 		//printf_ptr_1 = *addr;
+		// 		break;
+		// 	case 2:
+		// 		//printf_ptr_2 = *addr;
+		// 		break;
+		// 	case 3:
+		// 		printf_ptr_3 = *addr;
+		// 		break;
+		// }
 	} else if(strncmp(name,"nanosleep",9) == 0){
-		switch(iter){
-			case 0:
 				nanosleep_ptr = *addr;
-				break;
-			case 1:
 				nanosleep_ptr_1 = *addr;
-				break;
-			case 2:
 				nanosleep_ptr_2 = *addr;
-				break;
-			case 3:
-				nanosleep_ptr_3 = *addr;
-				break;
-		}
+		// switch(iter){
+		// 	case 0:
+		// 		nanosleep_ptr = *addr;
+		// 		nanosleep_ptr_1 = *addr;
+		// 		nanosleep_ptr_2 = *addr;
+		// 		break;
+		// 	case 1:
+		// 		//nanosleep_ptr_1 = *addr;
+		// 		break;
+		// 	case 2:
+		// 		//nanosleep_ptr_2 = *addr;
+		// 		break;
+		// 	case 3:
+		// 		nanosleep_ptr_3 = *addr;
+		// 		break;
+		// }
 	}
     }
     plthook_close(plthook);
