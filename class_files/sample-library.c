@@ -193,6 +193,9 @@ static int callback(struct dl_phdr_info *info, size_t size, void *data)
  					dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
 					nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
+					printf("Printf_ptr: %p\n",printf_ptr);
+					printf("printf_offset: %p\n",printf_offset);
+					printf("dummy_func_ptr: %p\n",dummy_func_ptr);
 				}
 				if(iter==1){
 					printf("iter: %i\n", iter);
@@ -200,6 +203,9 @@ static int callback(struct dl_phdr_info *info, size_t size, void *data)
 					dummy_func_ptr = (libc_text_copy_ptr + printfs_offset); 
 					nanosleep_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
 					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
+					printf("Prints_ptr: %p\n",prints_ptr);
+					printf("prints_offset: %p\n",printf_offset);
+					printf("dummy_func_ptrs: %p\n",dummy_func_ptr);
 				}
 
 				test_ptr = (char*)(libc_data_ptr);;
