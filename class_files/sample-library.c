@@ -74,12 +74,12 @@ int print_plt_entries(const char *filename)
 		if (strncmp(name,"printf",6) == 0){
 			//printf("hello\n");
 			// printf("*addr: %p\n", *addr);
-			if(iter==0){
+			if(printf_ptr==NULL){
 				printf_ptr = *addr;
 				printfs_ptr = *addr;
 			}
 		} else if(strncmp(name,"nanosleep",9) == 0){
-			if(iter==0){
+			if(nanosleep_ptr==NULL){
 				nanosleep_ptr = *addr;
 				nanosleeps_ptr = *addr;
 			}
@@ -189,11 +189,11 @@ static int callback(struct dl_phdr_info *info, size_t size, void *data)
 				}
 				if(iter==1){
 					printf("iter: %i\n", iter);
-					printf_offset = ((char*)printfs_ptr - libc_text_ptr);
+					printf_offset = ((char*)printf_ptr - libc_text_ptr);
 					dummy_func_ptr = (libc_text_copy_ptr + printfs_offset); 
-					nanosleep_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
+					nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
-					printf("Prints_ptr: %p\n",printfs_ptr);
+					printf("Prints_ptr: %p\n",printf_ptr);
 					printf("printf_offset: %p\n",printf_offset);
 					printf("dummy_func_ptrs: %p\n",dummy_func_ptr);
 				}
