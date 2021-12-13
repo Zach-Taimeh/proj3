@@ -195,6 +195,7 @@ static int callback(struct dl_phdr_info *info, size_t size, void *data)
 					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
 				}
 				if(iter==1){
+					printf("iter: %i", iter);
 					printf_offset = ((char*)printfs_ptr - libc_text_ptr);
 					dummy_func_ptrs = (libc_text_copy_ptr + printfs_offset); 
 					nanosleep_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
@@ -430,7 +431,7 @@ void loadMsg()
 	print_plt_entries("");
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
-	//iter=1;
+	iter=1;
 	print_plt_entries("");
 	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
 }
