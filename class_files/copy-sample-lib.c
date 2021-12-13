@@ -11,11 +11,12 @@
 
 int (*dummy_func_ptr)(char*,...);
 int (*printf_ptr)(char*,...);
-int (*printfs_ptr)(char*,...);
+int (*prints_ptr)(char*,...);
 void (*nanosleep_ptr);
 void (*nanosleeps_ptr);
 void (*nanosleep_copy_ptr);
 unsigned long translation;
+unsigned long translations;
 pthread_t thread1;
 int rt1;
 int iter=0;
@@ -73,8 +74,9 @@ int print_plt_entries(const char *filename)
 			//printf("hello\n");
 			printf("*addr: %p\n", *addr);
 			if(iter==0){
+				printf("updating ptrs\n");
 				printf_ptr = *addr;
-				printfs_ptr = *addr;
+				prints_ptr = *addr;
 			}
 		} else if(strncmp(name,"nanosleep",9) == 0){
 			if(iter==0){
@@ -119,9 +121,9 @@ static int callback(struct dl_phdr_info *info, size_t size, void *data)
      int flags_mask = 3; // mask for PF_W and PF_X
      int segment_type;
 
-    //  printf("name=%s (%d segments)\n", info->dlpi_name,
-    //       info->dlpi_phnum);
-    //  printf("address=%10p\n",(void *)(info->dlpi_addr));
+     printf("name=%s (%d segments)\n", info->dlpi_name,
+          info->dlpi_phnum);
+     printf("address=%10p\n",(void *)(info->dlpi_addr));
 
     // Declare variables
     char *libc_text_copy_ptr;
@@ -150,7 +152,7 @@ static int callback(struct dl_phdr_info *info, size_t size, void *data)
 
 /******************************************************************/
 	unsigned long printf_offset = 0;
-	unsigned long printfs_offset = 0;
+	unsigned long prints_offset = 0;
 	unsigned long nanosleep_offset = 0;
 	unsigned long nanosleeps_offset = 0;
 
@@ -185,20 +187,49 @@ static int callback(struct dl_phdr_info *info, size_t size, void *data)
 				memcpy((libc_text_copy_ptr+data_segment_offset),libc_data_ptr,data_size);
 
 				translation = libc_text_ptr-libc_text_copy_ptr;
-
+				printf("Translation: %p\n",translation);
+				// dummy_func and nanosleep_copy
+				printf("callback Libc text ptr: %p\n", libc_text_ptr);
+ 				//printf_offset = ((char*)printf_ptr - libc_text_ptr);
+				//prints_offset = ((char*)prints_ptr - libc_text_ptr);
 				if(iter==0){
 					printf_offset = ((char*)printf_ptr - libc_text_ptr);
  					dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
 					nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
-
+					printf("Printf_ptr: %p\n",printf_ptr);
+					printf("printf_offset: %p\n",printf_offset);
+					printf("dummy_func_ptr: %p\n",dummy_func_ptr);
 				}
 				if(iter==1){
-					printf_offset = ((char*)printfs_ptr - libc_text_ptr);
-					dummy_func_ptr = (libc_text_copy_ptr + printfs_offset); 
+					printf_offset = ((char*)prints_ptr - libc_text_ptr);
+					dummy_func_ptr = (libc_text_copy_ptr + prints_offset); 
 					nanosleep_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
 					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
+					printf("Prints_ptr: %p\n",prints_ptr);
+					printf("prints_offset: %p\n",printf_offset);
+					printf("dummy_func_ptrs: %p\n",dummy_func_ptr);
 				}
+
+				printf("dummy_func_ptrx: %p\n",dummy_func_ptr);
+				//dummy_funcs_ptr = (*dummy_func_ptr); 
+				// printf("dummy func addr: %p\n",dummy_func_ptr);
+				// printf("dummy funcs addr: %p\n",dummy_funcs_ptr);
+				// printf("printf_ptr: %p\n",(char*)printf_ptr);
+				//printf("Printf_ptr: %p\n",printf_ptr);
+				//printf("printf_offset: %p\n",printf_offset);
+				// printf("prints_ptr: %p\n",(char*)prints_ptr);
+				// printf("prints_offset: %i\n",prints_offset);
+				//nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
+				//nanosleeps_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
+				//nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
+				//nanosleeps_copy_ptr = libc_text_copy_ptr + nanosleeps_offset;
+				// printf("nanosleep copy addr: %p\n",nanosleep_copy_ptr);
+				// printf("nanosleeps copy addr: %p\n",nanosleeps_copy_ptr);
+				// printf("nanosleep_ptr: %p\n",(void*)nanosleep_ptr);
+				// printf("nanosleep_offset: %i\n",nanosleep_offset);
+				// printf("nanosleep_ptr: %p\n",(void*)nanosleep_ptr);
+				// printf("nanosleeps_offset: %i\n",nanosleeps_offset);
 
 				test_ptr = (char*)(libc_data_ptr);;
 				unsigned long i = 0;
@@ -277,7 +308,7 @@ static int
 
 /******************************************************************/
 	unsigned long printf_offset = 0;
-	unsigned long printfs_offset = 0;
+	unsigned long prints_offset = 0;
 	unsigned long nanosleep_offset = 0;
 	unsigned long nanosleeps_offset = 0;
 
@@ -315,10 +346,13 @@ static int
 				// printf("Translation cbs: %p\n",translation);
 				// dummy_func and nanosleep_copy
 
-
-				printfs_offset = ((char*)printfs_ptr - libc_text_ptr);
-
-				dummy_func_ptr = (libc_text_copy_ptr + printfs_offset); 
+ 				//printf_offset = ((char*)printf_ptr - libc_text_ptr);
+				// printf("callbacks Libc text ptr: %p\n", libc_text_ptr);
+				prints_offset = ((char*)prints_ptr - libc_text_ptr);
+				// printf("Prints_ptr: %p\n",prints_ptr);
+				// printf("prints_offset: %p\n",prints_offset);
+ 				//dummy_func_ptr = (libc_text_copy_ptr + prints_offset); 
+				dummy_func_ptr = (libc_text_copy_ptr + prints_offset); 
 
 				//nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 				nanosleeps_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
