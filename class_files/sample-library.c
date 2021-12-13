@@ -432,6 +432,7 @@ void *randomize()
 	print_plt_entries("");
 	//dl_iterate_phdr(callback, NULL);
 	install_hook_functions();
+	printf("fin inst hook funcssss\n");
 	sleep(10);
 	printf("done randomizer\n");
 	print_plt_entries("");
