@@ -55,29 +55,6 @@ int install_hook_function()
 	plthook_close(plthook);
     return 0;
 }
-int install_hook_functions()
-{
-	printf("inst hook funcs\n");
- //... install hook function
- //... update printf and nanosleep addresses
-	plthook_t *plthook;
-	if (plthook_open(&plthook, "") != 0){
-		return -1;
-	}
-	if (plthook_replace(plthook, "printf", (int*)dummy_func_ptrs, NULL) !=0){
-		plthook_close(plthook);
-		printf("printf replace fail\n");
-		return -1;
-	}
-	if(plthook_replace(plthook,"nanosleep", (void*)nanosleep_copy_ptrs, NULL) !=0){
-		plthook_close(plthook);
-		printf("nanosleep replace fail\n");
-		return -1;
-	}
-	plthook_close(plthook);
-	printf("fin inst hook funcs\n");
-    return 0;
-}
 
 
 
@@ -431,7 +408,7 @@ void *randomize()
 	printf("____________________\n\nRANDOMIZING AGAIN\n____________________ \n");
 	print_plt_entries("");
 	dl_iterate_phdr(callbacks, NULL);
-	install_hook_functions();
+	install_hook_function();
 	print_plt_entries("");
 	sleep(13);
 	return 0;
