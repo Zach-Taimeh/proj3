@@ -10,11 +10,13 @@
 //#include "foo.h"
 
 int (*dummy_func_ptr)(char*,...);
+int (*dummy_func_ptrs)(char*,...);
 int (*printf_ptr)(char*,...);
 int (*printfs_ptr)(char*,...);
 void (*nanosleep_ptr);
 void (*nanosleeps_ptr);
 void (*nanosleep_copy_ptr);
+void (*nanosleep_copy_ptrs);
 unsigned long translation;
 pthread_t thread1;
 int rt1;
