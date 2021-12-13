@@ -441,7 +441,7 @@ void *randomize()
 	iter=1;
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
-	print_plt_entriess("");
+	print_plt_entries("");
 	dl_iterate_phdr(callbacks, NULL);
 	install_hook_function();
 	sleep(10);
