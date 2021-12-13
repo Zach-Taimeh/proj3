@@ -195,11 +195,11 @@ static int callback(struct dl_phdr_info *info, size_t size, void *data)
 					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
 				}
 				if(iter==1){
-					printf("iter: %i", iter);
+					printf("iter: %i\n", iter);
 					printf_offset = ((char*)printfs_ptr - libc_text_ptr);
-					dummy_func_ptrs = (libc_text_copy_ptr + printfs_offset); 
+					dummy_func_ptr = (libc_text_copy_ptr + printfs_offset); 
 					nanosleep_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
-					nanosleep_copy_ptrs = libc_text_copy_ptr + nanosleep_offset;
+					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
 				}
 
 				test_ptr = (char*)(libc_data_ptr);;
