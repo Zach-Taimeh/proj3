@@ -103,17 +103,7 @@ void* alloc_executable_memory(void *addr,size_t size) {
   return ptr;
 }
 
-/*
- MSB           LSB
- _      _      _
- PF_R   PF_W   PF_X
-text segment
-	- p_type = PT_LOAD
-	- p_flags = PF_X && !PF_W
-data segment
-	- p_type = PT_LOAD
-	- p_flags = PF_W && !PF_X
-*/
+
 static int callback(struct dl_phdr_info *info, size_t size, void *data)
  {
      int j;
