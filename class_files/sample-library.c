@@ -203,8 +203,8 @@ static int callback(struct dl_phdr_info *info, size_t size, void *data)
 					dummy_func_ptr = (libc_text_copy_ptr + printfs_offset); 
 					nanosleep_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
 					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
-					printf("Prints_ptr: %p\n",prints_ptr);
-					printf("prints_offset: %p\n",printf_offset);
+					printf("Prints_ptr: %p\n",printfs_ptr);
+					printf("printf_offset: %p\n",printf_offset);
 					printf("dummy_func_ptrs: %p\n",dummy_func_ptr);
 				}
 
