@@ -57,7 +57,7 @@ int install_hook_function()
 }
 int install_hook_functions()
 {
-	
+	printf("inst hook funcs\n");
  //... install hook function
  //... update printf and nanosleep addresses
 	plthook_t *plthook;
@@ -75,6 +75,7 @@ int install_hook_functions()
 		return -1;
 	}
 	plthook_close(plthook);
+	printf("fin inst hook funcs\n");
     return 0;
 }
 
