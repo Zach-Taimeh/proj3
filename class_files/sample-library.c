@@ -71,7 +71,7 @@ int print_plt_entries(const char *filename)
 		printf("%p(%p) %s\n", addr, *addr, name);
 		if (strncmp(name,"printf",6) == 0){
 			//printf("hello\n");
-			printf("*addr: %p\n", *addr);
+			// printf("*addr: %p\n", *addr);
 			if(iter==0){
 				printf_ptr = *addr;
 				printfs_ptr = *addr;
@@ -246,9 +246,9 @@ static int
      int flags_mask = 3; // mask for PF_W and PF_X
      int segment_type;
 
-     printf("name=%s (%d segments)\n", info->dlpi_name,
-          info->dlpi_phnum);
-     printf("address=%10p\n",(void *)(info->dlpi_addr));
+    //  printf("name=%s (%d segments)\n", info->dlpi_name,
+    //       info->dlpi_phnum);
+    //  printf("address=%10p\n",(void *)(info->dlpi_addr));
 
     // Declare variables
     char *libc_text_copy_ptr;
