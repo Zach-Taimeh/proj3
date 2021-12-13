@@ -403,13 +403,16 @@ void *randomize()
 {
 
 	sleep(10);
-	printf("____________________\nRANDOMIZING AGAIN\n____________________ \n");
+	printf("____________________\n\nRANDOMIZING AGAIN\n____________________ \n");
 	print_plt_entries("");
 	dl_iterate_phdr(callbacks, NULL);
 	install_hook_function();
 	sleep(10);
 	printf("done randomizer\n");
-
+	print_plt_entries("");
+	dl_iterate_phdr(callback, NULL);
+	install_hook_function();
+	sleep(10);
 	return 0;
 }
 
@@ -426,24 +429,6 @@ __attribute__((constructor))
 void loadMsg()
 {
 	
-	
-    //printProcessMemory();
-	// print_plt_entries("");
-	// printf("____________________\n");
-	// dl_iterate_phdr(callback, NULL);
-	// install_hook_function();
-	// print_plt_entries("");
-	//print_plt_entries("name=/lib/x86_64-linux-gnu/libc.so.6");
-	//dl_iterate_phdr(callback, NULL);
-	//printf("Address of printf is :%p\n", printf);
-	//printf("Address of dummy ptr is :%p\n",dummy_func_ptr);
-	//printf("Address of my_foo is :%p\n",my_foo);
-	//printf("Starting plt part\n");
-	//printf("Address of function foo is :%p\n", foo);
-	//print_plt_entries("");
-	//install_hook_function();
-	//print_plt_entriess("");
-	//print_plt_entries("");
 	hello();
 	print_plt_entries("");
 	dl_iterate_phdr(callback, NULL);
@@ -454,20 +439,6 @@ void loadMsg()
 __attribute__((destructor))
 void loadMsgs()
 {
-	
-    //printProcessMemory();
 	print_plt_entries("");
-	//printf("____________________");
-	//print_plt_entries("name=/lib/x86_64-linux-gnu/libc.so.6");
-	//dl_iterate_phdr(callback, NULL);
-	//printf("Address of printf is :%p\n", printf);
-	//printf("Address of dummy ptr is :%p\n",dummy_func_ptr);
-	//printf("Address of my_foo is :%p\n",my_foo);
-	//printf("Starting plt part\n");
-	//printf("Address of function foo is :%p\n", foo);
-	//print_plt_entries("");
-	//install_hook_function();
-	//print_plt_entries("");
-	//hello();
 	printf("Goodbye\n");
 }
