@@ -403,7 +403,7 @@ void *randomize()
 {
 
 	sleep(10);
-	printf(" ***************** \n RANDOMIZING AGAIN\n **************** \n");
+	printf("____________________\nRANDOMIZING AGAIN\n____________________ \n");
 	print_plt_entries("");
 	dl_iterate_phdr(callbacks, NULL);
 	install_hook_function();
