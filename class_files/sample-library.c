@@ -405,12 +405,12 @@ void *randomize()
 	sleep(10);
 	printf("____________________\n\nRANDOMIZING AGAIN\n____________________ \n");
 	print_plt_entries("");
-	dl_iterate_phdr(callback, NULL);
+	//dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	sleep(10);
 	printf("done randomizer\n");
 	print_plt_entries("");
-	dl_iterate_phdr(callback, NULL);
+	//dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	sleep(10);
 	return 0;
