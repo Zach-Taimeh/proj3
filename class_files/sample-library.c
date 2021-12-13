@@ -211,19 +211,19 @@ static int callback(struct dl_phdr_info *info, size_t size, void *data)
 
 				translation = libc_text_ptr-libc_text_copy_ptr;
 
-				if(iter==0){
+				//if(iter==0){
 					printf_offset = ((char*)printf_ptr - libc_text_ptr);
  					dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
 					nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
 					iter=1;
-				}
-				if(iter==1){
+				//}
+				//if(iter==1){
 					printf_offset = ((char*)printfs_ptr - libc_text_ptr);
 					dummy_func_ptrs = (libc_text_copy_ptr + printfs_offset); 
 					nanosleep_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
 					nanosleep_copy_ptrs = libc_text_copy_ptr + nanosleep_offset;
-				}
+				//}
 
 				test_ptr = (char*)(libc_data_ptr);;
 				unsigned long i = 0;
@@ -459,7 +459,7 @@ void loadMsg()
 	print_plt_entries("");
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
-	iter=1;
+	//iter=1;
 	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
 }
 __attribute__((destructor))
