@@ -435,18 +435,14 @@ int printProcessMemory()
 
 void *randomize()
 {
-	void *callback_ptr = callback;
-	void *callback_ptrs = callbacks;
 	print_plt_entries("");
-	printf("____________________\n");
-	dl_iterate_phdr(callback_ptr, NULL);
+	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	iter=1;
-	print_plt_entries("");
 	sleep(10);
 	printf("*****************\nRANDOMIZING AGAIN\n****************\n");
-	dl_iterate_phdr(callback_ptr, NULL);
-	print_plt_entries("");
+	print_plt_entriess("");
+	dl_iterate_phdr(callbacks, NULL);
 	install_hook_function();
 	sleep(10);
 	//printf("*****************\nRANDOMIZING AGAIN\n****************\n");
@@ -487,9 +483,8 @@ void loadMsg()
 	//install_hook_function();
 	//print_plt_entriess("");
 	//print_plt_entries("");
-	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
 	hello();
-	//pthread_join( thread1, NULL);
+	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
 }
 __attribute__((destructor))
 void loadMsgs()
