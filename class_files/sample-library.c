@@ -376,7 +376,7 @@ static int
 
 void hello()
 {
-	printf("I just got loaded\n");
+	printf("Randomizer Loaded.\n");
 }
 
 int printProcessMemory()
@@ -405,7 +405,7 @@ void *randomize()
 {
 
 	sleep(10);
-	printf("____________________\n\nRANDOMIZING AGAIN\n____________________ \n");
+	printf("____________________\n\nRANDOMIZING\n____________________ \n");
 	print_plt_entries("");
 	dl_iterate_phdr(callbacks, NULL);
 	install_hook_function();
@@ -432,11 +432,12 @@ void loadMsg()
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	iter=1;
+	print_plt_entries("");
 	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
 }
 __attribute__((destructor))
 void loadMsgs()
 {
 	print_plt_entries("");
-	printf("Goodbye\n");
+	printf("Randomizer Closing.\n");
 }
