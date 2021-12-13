@@ -76,12 +76,12 @@ int print_plt_entries(const char *filename)
 			// printf("*addr: %p\n", *addr);
 			if(printf_ptr==NULL){
 				printf_ptr = *addr;
-				printfs_ptr = *addr;
+				//printfs_ptr = *addr;
 			}
 		} else if(strncmp(name,"nanosleep",9) == 0){
 			if(nanosleep_ptr==NULL){
 				nanosleep_ptr = *addr;
-				nanosleeps_ptr = *addr;
+				//nanosleeps_ptr = *addr;
 			}
 		}
     }
