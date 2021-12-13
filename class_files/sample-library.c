@@ -403,14 +403,12 @@ void *randomize()
 {
 
 	sleep(10);
-	printf(" ***************** \nRANDOMIZING AGAIN\n **************** \n");
+	printf(" ***************** \n RANDOMIZING AGAIN\n **************** \n");
 	print_plt_entries("");
 	dl_iterate_phdr(callbacks, NULL);
 	install_hook_function();
 	sleep(10);
-	//printf("*****************\nRANDOMIZING AGAIN\n****************\n");
-	//dl_iterate_phdr(callback, NULL);
-	//install_hook_function();
+	printf("done randomizer\n");
 
 	return 0;
 }
