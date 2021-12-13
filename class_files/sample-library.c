@@ -398,7 +398,10 @@ void *randomize()
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	print_plt_entries("");
-	sleep(13);
+	sleep(10);
+	dl_iterate_phdr(callback, NULL);
+	install_hook_function();
+	print_plt_entries("");
 	return 0;
 }
 
