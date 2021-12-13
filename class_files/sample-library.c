@@ -431,7 +431,7 @@ void loadMsg()
 	print_plt_entries("");
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
-	iter=1;
+	//iter=1;
 	print_plt_entries("");
 	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
 }
