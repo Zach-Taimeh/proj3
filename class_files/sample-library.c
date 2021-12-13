@@ -10,13 +10,11 @@
 //#include "foo.h"
 
 int (*dummy_func_ptr)(char*,...);
-int (*dummy_func_ptrs)(char*,...);
 int (*printf_ptr)(char*,...);
 int (*printfs_ptr)(char*,...);
 void (*nanosleep_ptr);
 void (*nanosleeps_ptr);
 void (*nanosleep_copy_ptr);
-void (*nanosleep_copy_ptrs);
 unsigned long translation;
 pthread_t thread1;
 int rt1;
@@ -178,25 +176,14 @@ static int callback(struct dl_phdr_info *info, size_t size, void *data)
 
 				translation = libc_text_ptr-libc_text_copy_ptr;
 
-				if(iter==0){
-					printf_offset = ((char*)printf_ptr - libc_text_ptr);
- 					dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
-					nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
-					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
-					printf("Printf_ptr: %p\n",printf_ptr);
-					printf("printf_offset: %p\n",printf_offset);
-					printf("dummy_func_ptr: %p\n",dummy_func_ptr);
-				}
-				if(iter==1){
-					printf("iter: %i\n", iter);
-					printf_offset = ((char*)printf_ptr - libc_text_ptr);
-					dummy_func_ptr = (libc_text_copy_ptr + printfs_offset); 
-					nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
-					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
-					printf("Prints_ptr: %p\n",printf_ptr);
-					printf("printf_offset: %p\n",printf_offset);
-					printf("dummy_func_ptrs: %p\n",dummy_func_ptr);
-				}
+				printf_offset = ((char*)printf_ptr - libc_text_ptr);
+				dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
+				nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
+				nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
+				printf("Printf_ptr: %p\n",printf_ptr);
+				printf("printf_offset: %p\n",printf_offset);
+				printf("dummy_func_ptr: %p\n",dummy_func_ptr);
+				
 
 				test_ptr = (char*)(libc_data_ptr);;
 				unsigned long i = 0;
@@ -399,7 +386,12 @@ int printProcessMemory()
 
 void *randomize()
 {
-
+	hello();
+	print_plt_entries("");
+	dl_iterate_phdr(callback, NULL);
+	install_hook_function();
+	iter=1;
+	print_plt_entries("");
 	sleep(10);
 	printf("____________________\n\nRANDOMIZING\n____________________ \n");
 	print_plt_entries("");
@@ -422,13 +414,6 @@ void *randomize()
 __attribute__((constructor))
 void loadMsg()
 {
-	
-	hello();
-	print_plt_entries("");
-	dl_iterate_phdr(callback, NULL);
-	install_hook_function();
-	iter=1;
-	print_plt_entries("");
 	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
 }
 __attribute__((destructor))
