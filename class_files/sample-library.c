@@ -191,7 +191,7 @@ static int callback(struct dl_phdr_info *info, size_t size, void *data)
  					dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
 					nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 					nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
-
+					iter==1;
 				}
 				if(iter==1){
 					printf_offset = ((char*)printfs_ptr - libc_text_ptr);
@@ -405,7 +405,7 @@ void *randomize()
 	sleep(10);
 	printf("____________________\n\nRANDOMIZING AGAIN\n____________________ \n");
 	print_plt_entries("");
-	dl_iterate_phdr(callbacks, NULL);
+	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	sleep(10);
 	printf("done randomizer\n");
