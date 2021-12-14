@@ -285,5 +285,5 @@ void loadMsg()
 __attribute__((destructor))
 void loadMsgs()
 {
-	printf("Randomizer Closing.\n");
+	printf("****************\nRandomizer Closing.\n\\****************");
 }
