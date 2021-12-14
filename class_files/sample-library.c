@@ -260,9 +260,9 @@ void *randomize()
 	while(1){
 		sleep(10);
 		printf("____________________\n\nRANDOMIZING\n____________________ \n");
-		print_plt_entries("");
 		dl_iterate_phdr(callback, NULL);
 		install_hook_function();
+		print_plt_entries("");
 	}
 	return 0;
 }
