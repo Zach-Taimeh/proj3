@@ -226,7 +226,7 @@ static int callback(struct dl_phdr_info *info, size_t size, void *data)
 
 void hello()
 {
-	printf("Randomizer Loaded.\n");
+	printf("____________________\nRandomizer LOADED.\n____________________ \n");
 }
 
 int printProcessMemory()
@@ -285,5 +285,5 @@ void loadMsg()
 __attribute__((destructor))
 void loadMsgs()
 {
-	printf("*******************\nRandomizer Closing.\n\*******************\n");
+	printf("____________________\nRandomizer CLOSING.\n____________________ \n");
 }
