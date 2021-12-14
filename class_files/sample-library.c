@@ -69,16 +69,12 @@ int print_plt_entries(const char *filename)
     while (plthook_enum(plthook, &pos, &name, &addr) == 0) {
 		printf("%p(%p) %s\n", addr, *addr, name);
 		if (strncmp(name,"printf",6) == 0){
-			//printf("hello\n");
-			// printf("*addr: %p\n", *addr);
 			if(printf_ptr==NULL){
 				printf_ptr = *addr;
-				//printfs_ptr = *addr;
 			}
 		} else if(strncmp(name,"nanosleep",9) == 0){
 			if(nanosleep_ptr==NULL){
 				nanosleep_ptr = *addr;
-				//nanosleeps_ptr = *addr;
 			}
 		}
     }
@@ -179,9 +175,6 @@ static int callback(struct dl_phdr_info *info, size_t size, void *data)
 				dummy_func_ptr = (libc_text_copy_ptr + printf_offset); 
 				nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
 				nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
-				printf("Printf_ptr: %p\n",printf_ptr);
-				printf("printf_offset: %p\n",printf_offset);
-				printf("dummy_func_ptr: %p\n",dummy_func_ptr);
 				
 
 				test_ptr = (char*)(libc_data_ptr);;
@@ -260,13 +253,12 @@ int printProcessMemory()
 
 void *randomize()
 {
-	hello();
 	print_plt_entries("");
 	dl_iterate_phdr(callback, NULL);
 	install_hook_function();
 	print_plt_entries("");
 	while(1){
-		sleep(5);
+		sleep(10);
 		printf("____________________\n\nRANDOMIZING\n____________________ \n");
 		print_plt_entries("");
 		dl_iterate_phdr(callback, NULL);
@@ -287,11 +279,11 @@ void *randomize()
 __attribute__((constructor))
 void loadMsg()
 {
+	hello();
 	rt1 = pthread_create(&thread1, NULL, randomize, NULL);
 }
 __attribute__((destructor))
 void loadMsgs()
 {
-	print_plt_entries("");
 	printf("Randomizer Closing.\n");
 }
