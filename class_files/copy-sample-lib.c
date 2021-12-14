@@ -507,3 +507,137 @@ void loadMsgs()
 	//hello();
 	printf("Goodbye\n");
 }
+
+
+
+
+
+
+
+
+static int
+ callbacks(struct dl_phdr_info *info, size_t size, void *data)
+ {
+     int j;
+     int segment_flags;
+     int flags_mask = 3; // mask for PF_W and PF_X
+     int segment_type;
+
+    //  printf("name=%s (%d segments)\n", info->dlpi_name,
+    //       info->dlpi_phnum);
+    //  printf("address=%10p\n",(void *)(info->dlpi_addr));
+
+    // Declare variables
+    char *libc_text_copy_ptr;
+    char *libc_text_ptr;
+    char *libc_data_ptr;
+    unsigned long toAdd = 0;
+    unsigned long libc_total_copy_size = 0;
+    unsigned long text_size = 0;
+    unsigned long data_size = 0;
+    unsigned long data_segment_offset = 0;
+    unsigned long lea_opcode;
+    unsigned long *lea_opcode_ptr;
+    unsigned long data_copy_begin = 0;
+    unsigned long data_copy_end = 0;
+
+    char *test_ptr;
+    unsigned long *test_data_address;
+    unsigned long test_data_pointer;
+    unsigned long mask;
+
+    // Initialize variables
+    libc_text_copy_ptr = (char *)0;
+    libc_text_ptr = (char *)0;
+    libc_data_ptr = (char *)0;
+
+
+/******************************************************************/
+	unsigned long printf_offset = 0;
+	unsigned long printfs_offset = 0;
+	unsigned long nanosleep_offset = 0;
+	unsigned long nanosleeps_offset = 0;
+
+
+    // looping through segments within shared libraries and categorizing them
+    // as text/code segments or data segments
+    for (j = 0; j < info->dlpi_phnum; j++)
+ 	if (info->dlpi_phdr[j].p_type == 1){
+ 		segment_flags = info->dlpi_phdr[j].p_flags;
+ 		segment_type = segment_flags & flags_mask;
+		
+ 		if (segment_type == 1){
+        // printf("\t\t header %2d: address=%10p: memsize=%lu: type=text segment\n", j,
+        //      (void *) (info->dlpi_addr + info->dlpi_phdr[j].p_vaddr),info->dlpi_phdr[j].p_memsz);
+ 		} else if (segment_type == 2){
+ 		// printf("\t\t header %2d: address=%10p: memsize=%1lu: type=data segment\n", j,
+        //      (void *) (info->dlpi_addr + info->dlpi_phdr[j].p_vaddr),info->dlpi_phdr[j].p_memsz);
+ 		}
+
+ 		if (strncmp(info->dlpi_name,"/lib/x86_64-linux-gnu/libc.so.6",31) == 0){
+ 			if (segment_type == 1){
+ 				text_size = info->dlpi_phdr[j].p_memsz;
+ 				libc_text_ptr = (char *)info->dlpi_addr + info->dlpi_phdr[j].p_vaddr;
+
+				data_size = info->dlpi_phdr[j+1].p_memsz;
+ 				libc_data_ptr = (char *)info->dlpi_addr + info->dlpi_phdr[j+1].p_vaddr;
+				data_segment_offset = libc_data_ptr - libc_text_ptr;
+				libc_total_copy_size = data_size + (unsigned long)data_segment_offset;	
+				
+				libc_text_copy_ptr = (char *) alloc_executable_memory(0,libc_total_copy_size);
+ 				memcpy(libc_text_copy_ptr,libc_text_ptr,text_size);
+				memcpy((libc_text_copy_ptr+data_segment_offset),libc_data_ptr,data_size);
+
+				translation = libc_text_ptr-libc_text_copy_ptr;
+				// printf("Translation cbs: %p\n",translation);
+				// dummy_func and nanosleep_copy
+
+
+				printfs_offset = ((char*)printfs_ptr - libc_text_ptr);
+
+				dummy_func_ptr = (libc_text_copy_ptr + printfs_offset); 
+
+				//nanosleep_offset = ((char*)nanosleep_ptr - libc_text_ptr);
+				nanosleeps_offset = ((char*)nanosleeps_ptr - libc_text_ptr);
+				//nanosleep_copy_ptr = libc_text_copy_ptr + nanosleep_offset;
+				nanosleep_copy_ptr = libc_text_copy_ptr + nanosleeps_offset;
+
+
+				test_ptr = (char*)(libc_data_ptr);;
+				unsigned long i = 0;
+				int lea_count = 0;
+				unsigned long data_begin;
+				unsigned long data_end;
+				unsigned long text_begin;
+				unsigned long text_end;
+				text_begin = (unsigned long)libc_text_ptr;
+				text_end = (unsigned long)(libc_text_ptr + text_size);
+				data_begin = (unsigned long)(libc_text_ptr + data_segment_offset);
+				data_end = (unsigned long)(libc_text_ptr + data_segment_offset + data_size);
+				data_copy_begin = (unsigned long)(libc_text_copy_ptr + data_segment_offset);
+				data_copy_end = (unsigned long)(libc_text_copy_ptr + data_segment_offset + data_size);
+				// printf("Text begin: %lx\n",text_begin);
+				// printf("Text end:   %lx\n",text_end);
+				// printf("Data begin: %lx\n",data_begin);
+				// printf("Data end:   %lx\n",data_end);
+				// printf("Data copy begin: %lx\n",data_copy_begin);
+				// printf("Data copy end:   %lx\n",data_copy_end);
+				test_ptr = (char *)data_copy_begin;
+				for (i=0;i<data_size;i++){
+					test_data_address = (unsigned long*)(test_ptr+i);
+					test_data_pointer = *(test_data_address);
+					if (test_data_pointer > data_begin && test_data_pointer < data_end) {
+						*(test_data_address) = test_data_pointer - translation;
+						test_data_pointer = *(test_data_address);
+						//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
+					} else if (test_data_pointer > text_begin && test_data_pointer < text_end) {
+						*(test_data_address) = test_data_pointer - translation;
+						test_data_pointer = *(test_data_address);
+						//printf("Data segment address: %p, value: %lx\n",test_data_address,test_data_pointer);
+					}
+				}
+ 			}
+ 		}
+ 	}
+    return 0;
+ }
